@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 # Parts of this code taken from reference: https://github.com/pixegami/rag-tutorial-v2
 
 from langchain_community.embeddings.ollama import OllamaEmbeddings

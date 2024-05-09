@@ -101,7 +101,9 @@ def main(
 
 def getBigHelp() -> None:
     """Function to provide extra online help in the form of commands."""
-    console.print("\t :sparkles: _Infomaid_ is a simple AI prompt-based solution with built in Retrieval augmented generation (RAG) support!")
+    console.print(
+        "\t :sparkles: _Infomaid_ is a simple AI prompt-based solution with built in Retrieval augmented generation (RAG) support!"
+    )
     banner = """\n
 \t██╗███╗   ██╗███████╗ ██████╗ ███╗   ███╗ █████╗ ██╗██████╗ 
 \t██║████╗  ██║██╔════╝██╔═══██╗████╗ ████║██╔══██╗██║██╔══██╗
@@ -122,8 +124,12 @@ def getBigHelp() -> None:
     console.print("\t + Use pdfs as data source. Ask me for the prompt.")
     console.print("\t -> [green] poetry run infomaid --usepdfdata [/green]")
 
-    console.print("\t + Use general chat, give me two results to consider, not using pdf data")
-    console.print("\t -> [green] poetry run infomaid --count 2 --prompt \"describe four breeds of dogs\" [/green]")
+    console.print(
+        "\t + Use general chat, give me two results to consider, not using pdf data"
+    )
+    console.print(
+        '\t -> [green] poetry run infomaid --count 2 --prompt "describe four breeds of dogs" [/green]'
+    )
 
     console.print("\t + Query pdfs with supplied prompt and provide two outputs")
     console.print(
@@ -133,9 +139,11 @@ def getBigHelp() -> None:
     console.print(
         '\t -> [green] poetry run infomaid --count 2 --prompt "name four shapes" [/green]'
     )
-    console.print("\t + Use the prompt details of the supplied file for generative AI results")
     console.print(
-        '\t -> [green] poetry run infomaid --promptfile input/tell_me_a_joke.txt [/green]'
+        "\t + Use the prompt details of the supplied file for generative AI results"
+    )
+    console.print(
+        "\t -> [green] poetry run infomaid --promptfile input/tell_me_a_joke.txt [/green]"
     )
 
 
