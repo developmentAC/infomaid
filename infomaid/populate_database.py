@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 # Parts of this code taken from reference: https://github.com/pixegami/rag-tutorial-v2
 
 import argparse
@@ -18,7 +21,6 @@ CHROMA_PATH = "chroma"
 DATA_PATH = "data"
 
 console = Console()
-
 
 def main(resetDB: bool, myModel: str) -> None:
     # console.print("\t This is populate_databases.main()")
@@ -88,12 +90,11 @@ def add_to_chroma(chunks: list[Document], myModel: str):
             print("\t ✅ No new documents to add")
 
     except Exception:
-        console.print(
-            "\t :poop: [red]There seems to be a problem. Is Ollama server installed and running?[/red]"
-        )
+        console.print("\t :poop: [red]There seems to be a problem. Is Ollama server installed and running?[/red]")
         exit()
 
     # console.print("end of add_to_chroma()") # for debugging
+
 
 
 def calculate_chunk_ids(chunks):
@@ -128,3 +129,4 @@ def calculate_chunk_ids(chunks):
 def clear_database():
     if os.path.exists(CHROMA_PATH):
         shutil.rmtree(CHROMA_PATH)
+
