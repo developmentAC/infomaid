@@ -1,4 +1,4 @@
-# Infomaid
+# Infomaid: An AI and RAG-Enabled Learning Application
 
 ![logo](graphics/infomaid_logo_yellow.png)
 
