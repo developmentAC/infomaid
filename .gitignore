@@ -1,0 +1,36 @@
+# Vim #
+######################
+*.swp
+*.swo
+*.project.vim
+
+# R #
+######################
+*-Ex.R
+*.Rdata
+*.Rhistory
+
+# CTags #
+######################
+tags
+
+# MacOS #
+######################
+.DS_Store
+*~
+
+# Libre Office #
+# ####################
+ *.odp#
+
+# Hidden files from Python3 #
+################################
+.bash_history
+.python_history
+
+# GetAI #
+#########
+0_out/
+chroma/
+poetry.lock
+__pycache__
