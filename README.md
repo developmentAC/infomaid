@@ -12,14 +12,13 @@ Email: obonhamcarter at allegheny.edu
 
 ## Contents
 
-+ [Objectives](#objectives)
-+ [Introduction](#introduction)
++ [Overview](#overview)
 + [Prerequisites](#Prerequisites)
 + [Set Up Local Models for Ollama](#set-up-local-models-for-ollama)
 + [Setting Up The Project](#Setting-up-the-project)
 + [Execution](#Execution)
 + [Parameters](#Parameters)
-+ [General AI Generation](general-ai-generation)
++ [Generation](generation)
 + [Working with PDF Data](#working-with-pdf-data)
 + [Sample Project](#sample-project)
 + [Ethical Note](#ethical-note)
@@ -139,7 +138,7 @@ poetry run infomaid --count 2 --prompt "name four shapes"
 + usepdfdata - Use data gained from the PDF documents.
 + resetdb - Each time new PDF documents are placed in the `data/` directory, their content must be used to build a local dataset to query them. Use this parameter to clear out the former PDF content and to update the dataset with the new PDFs.
 
-### General AI Generation
+### Generation
 
 With _Infomaid_, users may ask the AI to prepare information from prompts such as outlines, emails, and other types of information. Requests can be made with a prompt that may be entered at the command line, inputted after execution, or entered as a text file. The text file may contain large prompts where there are lots of details to consider. In addition, the text file may help to automate jobs where the prompt is created automatically by another task.
 
