@@ -1,4 +1,4 @@
-# Infomaid, A simple AI prompt-based application!
+# Infomaid
 
 ![logo](graphics/infomaid_logo_yellow.png)
 
