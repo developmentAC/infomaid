@@ -33,4 +33,5 @@ tags
 0_out/
 chroma/
 poetry.lock
-__pycache__
+__pycache__/
+promptFiles/
