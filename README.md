@@ -10,7 +10,21 @@ Email: obonhamcarter at allegheny.edu
 
 [![MIT Licence](https://img.shields.io/bower/l/bootstrap)](https://opensource.org/licenses/MIT)
 
----
+## Contents
+
++ [Objectives](#objectives)
++ [Introduction](#introduction)
++ [Prerequisites](#Prerequisites)
++ [Set Up Local Models for Ollama](#set-up-local-models-for-ollama)
++ [Setting Up The Project](#Setting-up-the-project)
++ [Execution](#Execution)
++ [Parameters](#Parameters)
++ [General AI Generation](general-ai-generation)
++ [Working with PDF Data](#working-with-pdf-data)
++ [Sample Project](#sample-project)
++ [Ethical Note](#ethical-note)
++ [A Work In Progress](#a-work-in-progress)
+
 
 ## Overview
 
@@ -129,10 +143,9 @@ poetry run infomaid --count 2 --prompt "name four shapes"
 
 With _Infomaid_, users may ask the AI to prepare information from prompts such as outlines, emails, and other types of information. Requests can be made with a prompt that may be entered at the command line, inputted after execution, or entered as a text file. The text file may contain large prompts where there are lots of details to consider. In addition, the text file may help to automate jobs where the prompt is created automatically by another task.
 
-### Working with PDFs; RAG support
+### Working with PDF Data
 
-_Infomaid_ also allows the user to interact with PDF documents to search for ideas which are contained (somewhere) in the documents.
-_Retrieval Augmented Generation_, or (RAG), is a natural language processing (NLP) technique that harnesses information retrieval from documents for the delivery of generated information through the use of generative-based artificial intelligence (AI) models.
+_Infomaid_ also allows the user to interact with PDF documents to search for ideas which are contained (somewhere) in the documents. _Retrieval Augmented Generation_, or (RAG), is a natural language processing (NLP) technique that harnesses information retrieval from documents for the delivery of generated information through the use of generative-based artificial intelligence (AI) models.
 
 #### A Sample Project
 
