@@ -43,7 +43,7 @@ Before you start, make sure you have the following softwares have been installed
 + [All about Python](https://www.python.org)
 + Note: This project was created with Python V3.11. Earlier versions may also be compatible with this project. If you are using an earlier version of Python, then you will have to modify the `pyproject.toml` file from the project.
 
-+ To change from Python v3.11 to v3.10, we make the following change in `pyproject.toml`. version change,
++ To change from Python v3.11 to v3.10, we make the following change in `pyproject.toml`.
 
 Originally:
 ``` toml
@@ -56,6 +56,8 @@ python = "^3.10"
 ```
 
 + Check to see if you already have Python installed on your machine before installing a new version.
+
++ There will be depreciation warning messages from the `Langchain` library when the program is executed. These warnings will not prevent functionality of the code.
 
 + Poetry
 
