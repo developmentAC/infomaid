@@ -146,7 +146,7 @@ With _Infomaid_, users may ask the AI to prepare information from prompts such a
 
 _Infomaid_ also allows the user to interact with PDF documents to search for ideas which are contained (somewhere) in the documents. _Retrieval Augmented Generation_, or (RAG), is a natural language processing (NLP) technique that harnesses information retrieval from documents for the delivery of generated information through the use of generative-based artificial intelligence (AI) models.
 
-#### A Sample Project
+#### Sample Project
 
 For instance, imagine that the user wishes to create a draft of a recommendation letter for someone (i.e., a student) who has supplied a current curriculum vitae (CV) as a PDF document. Using _Infomaid_, a draft of the letter may be written that has been informed by the CV. To use this RAG functionality in this project, the command line parameter, `--usepdfdata`, must be utilized to execute the program. See the project's online help for a sample bash command line scrip to engage the RAG feature.
 
