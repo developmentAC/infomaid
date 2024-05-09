@@ -57,7 +57,7 @@ python = "^3.10"
 
 + Check to see if you already have Python installed on your machine before installing a new version.
 
-+ There will be depreciation warning messages from the `Langchain` library when the program is executed. These warnings will not prevent functionality of the code.
++ There will be depreciation warning messages from the `Langchain` library when the program is executed. These warnings will not prevent functionality of the code. This appears to an issue for the developers of `Lanchain`. See GitHub Issue [Latest Langchain throws deprecated warnings](https://github.com/DataDog/dd-trace-py/issues/8212).
 
 + Poetry
 
