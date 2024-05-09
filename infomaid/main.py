@@ -44,7 +44,7 @@ def main(
         default=False, help="Reset the database for use with new data?"
     ),
 ) -> None:
-    """Driver of the program."""
+    # """Driver of the program."""
 
     # bighelp?
     if bighelp:
