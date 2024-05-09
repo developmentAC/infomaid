@@ -18,7 +18,7 @@ Email: obonhamcarter at allegheny.edu
 + [Setting Up The Project](#Setting-up-the-project)
 + [Execution](#Execution)
 + [Parameters](#Parameters)
-+ [Generation](generation)
++ [Generation](#generation)
 + [Working with PDF Data](#working-with-pdf-data)
 + [Sample Project](#sample-project)
 + [Ethical Note](#ethical-note)
