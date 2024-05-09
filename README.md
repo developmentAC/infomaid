@@ -19,6 +19,7 @@ Email: obonhamcarter at allegheny.edu
 + [Execution](#Execution)
 + [Parameters](#Parameters)
 + [Generation](#generation)
++ [Output](#output)
 + [Working with PDF Data](#working-with-pdf-data)
 + [Sample Project](#sample-project)
 + [Ethical Note](#ethical-note)
@@ -142,6 +143,10 @@ poetry run infomaid --count 2 --prompt "name four shapes"
 
 With _Infomaid_, users may ask the AI to prepare information from prompts such as outlines, emails, and other types of information. Requests can be made with a prompt that may be entered at the command line, inputted after execution, or entered as a text file. The text file may contain large prompts where there are lots of details to consider. In addition, the text file may help to automate jobs where the prompt is created automatically by another task.
 
+#### Output
+
+All results are placed in the `0_out/` directory. The output files are listed according to the Ollama model that was used to create their content. Automatically created will be a hidden file called  `.mistral_currentStoryIndex.txt` that will keep track of the file indexing system. If the file is removed, then _Infomaid_ may overwrite the existing files. For new jobs on _Infomaid_, it is recommended that `0_out/` be removed, or moved somewhere outside of the project directory, in efforts to organize output by prompt.
+
 ### Working with PDF Data
 
 _Infomaid_ also allows the user to interact with PDF documents to search for ideas which are contained (somewhere) in the documents. _Retrieval Augmented Generation_, or (RAG), is a natural language processing (NLP) technique that harnesses information retrieval from documents for the delivery of generated information through the use of generative-based artificial intelligence (AI) models.
@@ -183,7 +188,6 @@ Same command using the `--promptfile FILE.TXT` parameter
 ``` bash
 poetry run infomaid --count 3 --usepdfdata --promptfile input/mit.txt
 ```
-
 
 Command Output:
 ``` bash
