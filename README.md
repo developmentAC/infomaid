@@ -186,7 +186,7 @@ poetry run infomaid --count 3 --usepdfdata --prompt "Write a letter of recommend
 Same command using the `--promptfile FILE.TXT` parameter
 
 ``` bash
-poetry run infomaid --count 3 --usepdfdata --promptfile input/mit.txt
+poetry run infomaid --count 3 --usepdfdata --promptfile promptFiles/mit.txt
 ```
 
 Command Output:
