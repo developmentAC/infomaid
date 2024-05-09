@@ -132,14 +132,24 @@ poetry run infomaid --count 2 --prompt "name four shapes"
 ## Execution
 ### Parameters
 
-+ bighelp - Provides CLI commands to use the project.
-+ count - The number of results to give. It is sometimes a good idea to have several results from which to choose as not all output is the same.
-+ promptfile - The parameter to load a text file in which a complicated prompt is provided. The text file can be used to describe the prompt for the outputs using PDF data, in addition to the regular generative output.
-+ model - If the user would like to use a model different from the default, `mistral`, then this parameter may be used to load that model. Note: the model must first be `pull`ed to the local machine. The command to pull a specific model is `ollama pull [myModel]`.
-+ pdfmodel - Use a specific model other than the default `nomic-embed-text` to work with the PDF data.
-+ prompt - the initial piece of information to instruct the model.
-+ usepdfdata - Use data gained from the PDF documents.
-+ resetdb - Each time new PDF documents are placed in the `data/` directory, their content must be used to build a local dataset to query them. Use this parameter to clear out the former PDF content and to update the dataset with the new PDFs.
+
++ __bighelp__ - Provides CLI commands to use the project.
+
++ __count__ - The number of results to give. It is sometimes a good idea to have several results from which to choose as not all output is the same.
+
++ __promptfile__ - The parameter to load a text file in which a complicated prompt is provided.  The text file can be used to describe the prompt for the outputs using PDF data, in addition to the regular generative output.
+
++ __model__ - Used to delare a model if different from the default, `mistral` for general usage (i.e. not for RAG using the PDF data).
+  + Note: the model must first be `pull`ed to the local machine for usage. The command to pull a specific model is `ollama pull [myModel]`.
+
++ __pdfmodel__ - Use a specific model other than the default `nomic-embed-text` to work with the PDF data.
+
++ __prompt__ - The initial set of instructions about what kind of information work to complete using Ollama.
+
++ __usepdfdata__ - A toggle to specify using RAG support (i.e., PDF data sources). In absence of this parameter at the command line, the _Infomaid_ will not use data from PDF documents.
+
++ __resetdb__ - PDF documents are placed in the `data/` directory to provide the content to build a dataset with which the user may interacte. To prepare this dataset after documents have been placd in `data/`, the parameter `--resetdb` is used to clear out the former PDF content and to update the dataset with the new PDFs. 
+  + Note: Always use this parameter when changing PDF content to avoid informational contamination of the results.
 
 ### Generation
 
