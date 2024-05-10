@@ -218,7 +218,7 @@ I am writing this letter in the highest regard and with great enthusiasm to reco
 In summary, AstroBill's unique blend of intellect, creativity, adaptability, determination, and compassion make him an outstanding candidate for MIT's graduate program. His diverse skills and experiences will enrich any academic or professional environment, and I have no doubt that he will continue to excel in your esteemed institution.
 ```
 
-(Or whatever!! Now the letter can be edited to add a human-touch to add certain value.)
+(Or whatever!! Now the letter can be edited to add a _human-touch_ and extra value.)
 
 ## Ethical Note
 
