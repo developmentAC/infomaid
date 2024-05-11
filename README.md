@@ -119,13 +119,13 @@ poetry run infomaid --usepdfdata
 poetry run infomaid --usepdfdata
 ```
 
-+ Query pdfs with prompt. provide two outputs
++ Query pdfs with prompt. Provide two outputs.
 
 ``` bash
 poetry run infomaid --count 2 --usepdfdata --prompt "what is the article's main idea?"
 ```
 
-+ Ask a silly question!
++ Ask a silly question! Provide two outputs.
 
 ``` bash
 poetry run infomaid --count 2 --prompt "name four shapes"
