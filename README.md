@@ -91,15 +91,24 @@ Check that the software is working on your system.
 poetry run infomaid --help
 ```
 
-Use online help to help you to remember how to use the parameters.
+Use online help to help you to remember how to use the parameters. Sample commands are privided to copy and paste with editing.
 
 ``` bash
 poetry run infomaid --bighelp
 ```
 
-The output is a list of commands that the user may edit to to work with the project.
+Some of the types of parameters are the following.
 
-Output:
++ Ask a silly question! Provide two outputs.
+
+``` bash
+poetry run infomaid --count 2 --prompt "name four shapes"
+```
++ Use general chat, no pdf data
+
+``` bash
+poetry run infomaid --usepdfdata
+```
 
 + Reset and build the internal data of pdf data.
 
@@ -115,22 +124,10 @@ poetry run infomaid --resetdb
 poetry run infomaid --usepdfdata --promptfile "promptFiles/myPrompt.txt"
 ```
 
-+ Use general chat, no pdf data
-
-``` bash
-poetry run infomaid --usepdfdata
-```
-
 + Query pdfs with prompt. Provide two outputs.
 
 ``` bash
 poetry run infomaid --count 2 --usepdfdata --prompt "what is the article's main idea?"
-```
-
-+ Ask a silly question! Provide two outputs.
-
-``` bash
-poetry run infomaid --count 2 --prompt "name four shapes"
 ```
 
 ## Execution
