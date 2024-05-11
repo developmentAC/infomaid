@@ -42,31 +42,31 @@ Before you start, make sure you have the following softwares have been installed
 + Special note: This project was developed on the MacOS and Linux but has not been tested on Windows. 
 
 + Python
-+ [All about Python](https://www.python.org)
-+ Note: This project was created with Python V3.11. Earlier versions may also be compatible with this project. If you are using an earlier version of Python, then you will have to modify the `pyproject.toml` file from the project.
+  + [All about Python](https://www.python.org)
+  + Note: This project was created with Python V3.11. Earlier versions may also be compatible with this project. If you are using an earlier version of Python, then you will have to modify the `pyproject.toml` file from the project.
 
-+ To change from Python v3.11 to v3.10, we make the following change in `pyproject.toml`.
+  + To change from Python v3.11 to v3.10, we make the following change in `pyproject.toml`.
 
-Originally:
-``` toml
-python = "^3.11"
-```
+  Originally:
+  ``` toml
+  python = "^3.11"
+  ```
 
-After editing:
-``` toml
-python = "^3.10"
-```
+  After editing:
+  ``` toml
+  python = "^3.10"
+  ```
 
-+ Check to see if you already have Python installed on your machine before installing a new version.
+  + Check to see if you already have Python installed on your machine before installing a new version.
 
-+ There will be depreciation warning messages from the `Langchain` library when the program is executed. These warnings will not prevent functionality of the code. This appears to an issue for the developers of `Lanchain`. See GitHub Issue [Latest Langchain throws deprecated warnings](https://github.com/DataDog/dd-trace-py/issues/8212).
+  + There will be depreciation warning messages from the `Langchain` library when the program is executed. These warnings will not prevent functionality of the code. This appears to an issue for the developers of `Lanchain`. See GitHub Issue [Latest Langchain throws deprecated warnings](https://github.com/DataDog/dd-trace-py/issues/8212).
 
 + Poetry
 
-+ [Instructions to install Poetry](https://python-poetry.org/docs/#installation)
+  + [Instructions to install Poetry](https://python-poetry.org/docs/#installation)
 
 + Ollama
-+ [Instructions to install Ollama](https://www.ollama.com/)
+  + [Instructions to install Ollama](https://www.ollama.com/)
 
 ### Set Up Local Models for Ollama
 
