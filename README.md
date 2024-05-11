@@ -39,7 +39,7 @@ The software runs locally, without the need to send information for processing t
 
 Before you start, make sure you have the following softwares have been installed:
 
-+ Special note: This project was developed on the MacOS (Ventura). Other OSs such as Windows and Linux have not been tested.
++ Special note: This project was developed on the MacOS (Sonoma). Other OSs such as Windows and Linux have not been tested.
 
 + Python
   + [All about Python](https://www.python.org)
