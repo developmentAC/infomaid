@@ -31,7 +31,9 @@ Email: obonhamcarter at allegheny.edu
 _Infomaid_ is a simple AI prompt-based solution with built in Retrieval augmented generation (RAG) support!
 
 
-Welcome to this simple AI application! _Infomaid_ is an experimental AI prompt-driven solution to help complete work with information. The software runs locally, without the need to send information to another machine online. This application requires [Ollama](https://www.ollama.com/), for service. Parts of this project code for working with PDFs were borrowed from Pixegami's RAG tutorial at [Reference](https://github.com/pixegami/rag-tutorial-v2). Much thanks!
+Welcome to this simple AI application! _Infomaid_ is an experimental AI prompt-driven solution (i.e., each "chat" involves writing a separate prompt to use with a new execution of _Infomaid_) to help complete text-based work with information.
+
+The software runs locally, without the need to send information for processing to another machine online. This application requires [Ollama](https://www.ollama.com/), for service. Parts of this project code for working with PDFs were borrowed from Pixegami's RAG tutorial at [Reference](https://github.com/pixegami/rag-tutorial-v2). Much thanks!
 
 ## Prerequisites
 
