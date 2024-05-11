@@ -107,10 +107,12 @@ Output:
 poetry run infomaid --resetdb
 ```
 
-+ Use pdfs as data source.
++ Use pdfs as data source with a provided prompt file (`myPrompt.txt`) in which instructions are provided about what the results should look like.
+
+  + Note: if no prompt is supplied, then the program will stop to ask for one during execution.
 
 ``` bash
-poetry run infomaid --usepdfdata
+poetry run infomaid --usepdfdata --promptfile "promptFiles/myPrompt.txt"
 ```
 
 + Use general chat, no pdf data
