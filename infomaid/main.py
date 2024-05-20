@@ -118,11 +118,10 @@ def getBigHelp() -> None:
 
     # Banner art: https://manytools.org/hacker-tools/ascii-banner/
 
-    console.print("\t + Reset and build the internal data of pdf data to use.")
-    console.print("\t -> [green] poetry run infomaid --resetdb [/green]")
-
-    console.print("\t + Use pdfs as data source. Ask me for the prompt.")
-    console.print("\t -> [green] poetry run infomaid --usepdfdata [/green]")
+    console.print("\t + Ask a silly question of generative AI!")
+    console.print(
+        '\t -> [green] poetry run infomaid --prompt "name four shapes" [/green]'
+    )
 
     console.print(
         "\t + Use general chat, give me two results to consider, not using pdf data"
@@ -131,13 +130,15 @@ def getBigHelp() -> None:
         '\t -> [green] poetry run infomaid --count 2 --prompt "describe four breeds of dogs" [/green]'
     )
 
+    console.print("\t + Reset and build the internal data of pdf data to use.")
+    console.print("\t -> [green] poetry run infomaid --resetdb [/green]")
+
+    console.print("\t + Use pdfs as data source. Ask me for the prompt.")
+    console.print("\t -> [green] poetry run infomaid --usepdfdata [/green]")
+
     console.print("\t + Query pdfs with supplied prompt and provide two outputs")
     console.print(
         '\t -> [green] poetry run infomaid --count 2 --usepdfdata --prompt "what is the main idea of the article?" [/green]'
-    )
-    console.print("\t + Ask a silly question!")
-    console.print(
-        '\t -> [green] poetry run infomaid --count 2 --prompt "name four shapes" [/green]'
     )
     console.print(
         "\t + Use the prompt details of the supplied file for generative AI results"
