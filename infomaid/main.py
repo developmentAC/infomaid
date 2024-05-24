@@ -26,7 +26,7 @@ cli = typer.Typer()
 @cli.command()
 def main(
     bighelp: bool = typer.Option(default=False, help="Get Commonly used commands."),
-    count: int = 1,
+    count: int = typer.Option(default=1, help="Number of results to get from the prompt."),
     promptfile: Path = typer.Option(default=None, help="Give your prompt as a file."),
     model: str = typer.Option(
         default="mistral",
@@ -34,7 +34,7 @@ def main(
     ),
     pdfmodel: str = typer.Option(
         default="nomic-embed-text",
-        help="PDF model. First time install -->  ollama pull nomic-embed-text",
+        help="PDF model. First time install --> ollama pull nomic-embed-text",
     ),
     prompt: str = typer.Option(default="", help="Give your prompt as a line."),
     usepdfdata: bool = typer.Option(
