@@ -144,7 +144,7 @@ def getBigHelp() -> None:
         "\t + Use the prompt details of the supplied file for generative AI results"
     )
     console.print(
-        "\t -> [green] infomaid poetry run infomaid --promptfile promptFiles/tell_me_a_joke.txt [/green]"
+        "\t -> [green] poetry run infomaid --promptfile promptFiles/tell_me_a_joke.txt [/green]"
     )
 
 
