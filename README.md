@@ -25,11 +25,9 @@ Email: obonhamcarter at allegheny.edu
 + [Ethical Note](#ethical-note)
 + [A Work In Progress](#a-work-in-progress)
 
-
 ## Overview
 
 _Infomaid_ is a simple AI prompt-based solution with built in Retrieval augmented generation (RAG) support!
-
 
 Welcome to this simple AI application! _Infomaid_ is an experimental AI prompt-driven solution (i.e., each "chat" involves writing a separate prompt to use with a new execution of _Infomaid_) to help complete text-based work with information.
 
@@ -48,11 +46,13 @@ Before you start, make sure you have the following softwares have been installed
   + To change from Python v3.11 to v3.10, we make the following change in `pyproject.toml`.
 
   Originally:
+
   ``` toml
   python = "^3.11"
   ```
 
   After editing:
+
   ``` toml
   python = "^3.10"
   ```
@@ -61,11 +61,12 @@ Before you start, make sure you have the following softwares have been installed
 
   + There will be depreciation warning messages from the `Langchain` library when the program is executed. These warnings will not prevent functionality of the code. This appears to an issue for the developers of `Lanchain`. See GitHub Issue [Latest Langchain throws deprecated warnings](https://github.com/DataDog/dd-trace-py/issues/8212).
 
-+ Poetry
++ Poetry: Used to manage the virtual environment and to _frame_ the project as a command line app.
+
 
   + [Instructions to install Poetry](https://python-poetry.org/docs/#installation)
 
-+ Ollama
++ Ollama: The AI server.
   + [Instructions to install Ollama](https://www.ollama.com/)
 
 ### Set Up Local Models for Ollama
