@@ -100,15 +100,16 @@ poetry run infomaid --bighelp
 
 Some of the types of parameters are the following.
 
-+ Ask a silly question! Provide two outputs.
++ Use general chat, give me one result, ask me for a prompt
+
+``` bash
+poetry run infomaid --count 1
+```
+
++ Ask a silly question from the command line! Provide two outputs.
 
 ``` bash
 poetry run infomaid --count 2 --prompt "name four shapes"
-```
-+ Use general chat, no pdf data
-
-``` bash
-poetry run infomaid --usepdfdata
 ```
 
 + Reset and build the internal data of pdf data.
