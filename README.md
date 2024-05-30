@@ -173,7 +173,7 @@ For instance, imagine that the user wishes to create a draft of a recommendation
 A prompt for such a task would be the following;
 
 ``` text
-Write a letter of recommendation for MIT graduate school for Oliver Bonham-Carter. Use the details from the data to complete the draft.
+Write a letter of recommendation for MIT graduate school for AstroBill. Use the details from the data to complete the draft.
 ```
 
 To set up the project, the PDF of the CV must first be copied into the `data/` directory of the project. It is important to note that other non-related PDF documents ought to be removed from this directory to prevent interference with the letter-writing task. The following command is necessary to update the working dataset involving PDFs.
@@ -195,7 +195,7 @@ Adding new documents: 113
 Next, the prompt may be introduced with the following command. Note, this command will return three potential letters that may differ in quality.
 
 ``` bash
-poetry run infomaid --count 3 --usepdfdata --prompt "Write a letter of recommendation for MIT graduate school for Oliver Bonham-Carter. Use the details from the data to complete the draft."
+poetry run infomaid --count 3 --usepdfdata --prompt "Write a letter of recommendation for MIT graduate school for AstroBill. Use the details from the data to complete the draft."
 ```
 
 Same command using the `--promptfile FILE.TXT` parameter
