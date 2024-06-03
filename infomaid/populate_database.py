@@ -37,6 +37,7 @@ def main(resetDB: bool, myModel: str) -> None:
 
 
 def load_documents():
+    """ load the content from pdf files located in the path defined above. """
     # console.print("This is load_documents()") # for debugging
     document_loader = PyPDFDirectoryLoader(DATA_PATH)
     return document_loader.load()
