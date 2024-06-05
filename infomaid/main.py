@@ -104,7 +104,7 @@ def main(
 def getBigHelp() -> None:
     """Function to provide extra online help in the form of commands."""
     console.print(
-        "\t :sparkles: _Infomaid_ is a simple AI prompt-based solution with built in Retrieval augmented generation (RAG) support!"
+        "\t :sparkles: _Infomaid_ is a simple AI prompt-based solution with built in Retrieval Augmented Generation (RAG) support!"
     )
     banner = """\n
 \t██╗███╗   ██╗███████╗ ██████╗ ███╗   ███╗ █████╗ ██╗██████╗ 
