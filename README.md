@@ -43,18 +43,18 @@ Before you start, make sure you have the following softwares have been installed
   + [All about Python](https://www.python.org)
   + Note: This project was created with Python V3.11. Earlier versions may also be compatible with this project. If you are using an earlier version of Python, then you will have to modify the `pyproject.toml` file from the project.
 
-  + To change from Python v3.11 to v3.10, we make the following change in `pyproject.toml`.
+  + To change from Python v3.10 through v3.13, to just Python v3.9 we make the following change in `pyproject.toml`. Note: This may cause other errors.
 
   Originally:
 
   ``` toml
-  python = "^3.11"
+  python = ">=3.10,<3.13" 
   ```
 
   After editing:
 
   ``` toml
-  python = "^3.10"
+  python = "^3.9"
   ```
 
   + Check to see if you already have Python installed on your machine before installing a new version.
