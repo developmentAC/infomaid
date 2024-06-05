@@ -2,7 +2,7 @@
 
 ![logo](graphics/infomaid_logo_yellow.png)
 
-Date: 7 May 2024
+Date: 4 June 2024
 
 [Oliver Bonham-Carter](https://www.oliverbonhamcarter.com/)
 
