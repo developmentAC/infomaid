@@ -9,9 +9,9 @@ from langchain_community.embeddings.ollama import OllamaEmbeddings
 
 
 def get_embedding_function(myModel):
-    """ Funtion to use Langchain with a model (recommended: nomic-embed-text) to create the embeddings for project. """
+    """Funtion to use Langchain with a model (recommended: nomic-embed-text) to create the embeddings for project."""
     # embeddings = BedrockEmbeddings(
     # credentials_profile_name="default", region_name="us-east-1"
     # ) # use Amazon Web Server
-    embeddings = OllamaEmbeddings(model=myModel)  # use local server with Ollama 
+    embeddings = OllamaEmbeddings(model=myModel)  # use local server with Ollama
     return embeddings

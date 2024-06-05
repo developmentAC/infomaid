@@ -26,7 +26,9 @@ cli = typer.Typer()
 @cli.command()
 def main(
     bighelp: bool = typer.Option(default=False, help="Get Commonly used commands."),
-    count: int = typer.Option(default=1, help="Number of results to get from the prompt."),
+    count: int = typer.Option(
+        default=1, help="Number of results to get from the prompt."
+    ),
     promptfile: Path = typer.Option(default=None, help="Give your prompt as a file."),
     model: str = typer.Option(
         default="mistral",

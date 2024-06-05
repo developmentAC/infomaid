@@ -7,6 +7,7 @@
 import argparse
 import os
 import shutil
+
 # from langchain.document_loaders.pdf import PyPDFDirectoryLoader # deprecated code
 from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -19,6 +20,7 @@ from langchain_core.documents import Document
 
 # from get_embedding_function import get_embedding_function
 from infomaid import get_embedding_function
+
 # from langchain.vectorstores.chroma import Chroma # deprecated code
 from langchain_community.vectorstores import Chroma
 
@@ -46,13 +48,10 @@ def main(resetDB: bool, myModel: str) -> None:
 
 
 def load_documents():
-    """ Load data into Document objects from pdf files located in the path defined above. """
+    """Load data into Document objects from pdf files located in the path defined above."""
     # console.print("This is load_documents()") # for debugging
     document_loader = PyPDFDirectoryLoader(DATA_PATH)
     return document_loader.load()
-
-
-
 
 
 def split_documents(documents: list[Document]):
