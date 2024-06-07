@@ -39,11 +39,18 @@ def main(
         help="PDF model. First time install --> ollama pull nomic-embed-text",
     ),
     prompt: str = typer.Option(default="", help="Give your prompt as a line."),
-    usepdfdata: bool = typer.Option(
-        default=False, help="Chat with pdfs data (not general generative AI)?"
+    useOwnData: bool = typer.Option(
+        default=False,
+        help="Chat with nxml or pdfs data that was used to build the project's database (not generic generative AI)?",
     ),
     resetdb: bool = typer.Option(
         default=False, help="Reset the database for use with new data?"
+    ),
+    usePDF: bool = typer.Option(
+        default=False, help="Use PDF documents to populate the database?"
+    ),
+    useXML: bool = typer.Option(
+        default=False, help="Use XML documents to populate the database?"
     ),
 ) -> None:
     # """Driver of the program."""
@@ -55,9 +62,7 @@ def main(
 
     # reset database
     if resetdb == True:  # command to populate database with pdf
-        # console.print("\t :sparkles: Resetting database ...")
-        populate_database.main(resetdb, pdfmodel)
-        console.print("\t :smiley: Populating complete")
+        populate_database.main(resetdb, pdfmodel, usePDF, useXML)
         exit()
     #
     seed = None
@@ -68,30 +73,30 @@ def main(
             seed = prompt
         else:
             seed = console.input(
-                "\t[green] What kind of AI help do you need? [/green] :"
+                "\t[bright_green] What kind of AI help do you need? [/bright_green] :"
             )
             if len(seed) == 0:  # nothing entered
-                console.print("\t[red] Nothing entered. Exiting ...[/red]")
+                console.print("\t[bright_red] Nothing entered. Exiting ...[/bright_red]")
                 raise typer.Abort()
             prompt = seed
     else:
         if promptfile.is_file():
             seed = promptfile.read_text()
-            console.print(f"The data file that contains the input is: {seed}")
+            console.print(f"[bright_green]The data file that contains the input is: {seed}[bright_green]")
             prompt = seed
         else:
             console.print(f"\t:scream: Bad filename entered")
             raise typer.Abort()
-    console.print(f"\t [cyan] Code prompt:\n\t[/cyan] [yellow]  {prompt}[/yellow]")
-    console.print(f"\t [cyan] Model: {model}[/cyan]")
-    console.print(f"\t [cyan] Number of stories to create: {count}[/cyan]")
+    console.print(f"\t [bright_cyan] Code prompt:\n\t[bright_yellow]  {prompt}[/bright_yellow]")
+    console.print(f"\t [bright_cyan] Model: {model}[/bright_cyan]")
+    console.print(f"\t [bright_cyan] Number of stories to create: {count}[/bright_cyan]")
     if len(prompt) > 0:
-        if not usepdfdata:
+        if not useOwnData:
             for i in range(int(count)):
                 myStory = tellStory(prompt, model)  # us ollama to generate the story.
                 saveFile(myStory, model)  # Save the story as a file
 
-        if usepdfdata:  # chat with pdfs
+        if useOwnData:  # chat with pdfs
             for i in range(int(count)):
                 myStory = query_data.main(prompt, pdfmodel)  # do a query
                 myStory = formatOutput(prompt, myStory)  # format output
@@ -104,7 +109,7 @@ def main(
 def getBigHelp() -> None:
     """Function to provide extra online help in the form of commands."""
     console.print(
-        "\t :sparkles: _Infomaid_ is a simple AI prompt-based solution with built in Retrieval Augmented Generation (RAG) support!"
+        "\t :sparkles: _Infomaid_ is a simple AI prompt-based solution with built in Retrieval augmented generation (RAG) support!"
     )
     banner = """\n
 \t██╗███╗   ██╗███████╗ ██████╗ ███╗   ███╗ █████╗ ██╗██████╗ 
@@ -115,38 +120,52 @@ def getBigHelp() -> None:
 \t╚═╝╚═╝  ╚═══╝╚═╝      ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚═════╝ 
 
 """
-    randomColour = random.choice(["green", "blue", "red", "yellow", "cyan"])
+    randomColour = random.choice(["bright_green", "bright_blue", "bright_red", "bright_yellow", "bright_cyan"])
     console.print(f"\t[{randomColour}]{banner}[/{randomColour}]")
 
     # Banner art: https://manytools.org/hacker-tools/ascii-banner/
 
     console.print("\t + Ask a silly question of generative AI!")
     console.print(
-        '\t -> [green] poetry run infomaid --prompt "name four shapes" [/green]'
+        '\t -> [bright_green] poetry run infomaid --prompt "name four shapes" [/bright_green]'
     )
 
     console.print(
         "\t + Use general chat, give me two results to consider, not using pdf data"
     )
     console.print(
-        '\t -> [green] poetry run infomaid --count 2 --prompt "describe four breeds of dogs" [/green]'
+        '\t -> [bright_green] poetry run infomaid --count 2 --prompt "describe four breeds of dogs" [/bright_green]'
     )
 
-    console.print("\t + Reset and build the internal data of pdf data to use.")
-    console.print("\t -> [green] poetry run infomaid --resetdb [/green]")
+    console.print("\t + Reset and build the internal database with local data, use --usepdf or ---usexml options.")
+    console.print("\t -> [bright_green] poetry run infomaid --resetdb [/bright_green]")
+
+    console.print(
+        "\t     * Reset and build the internal database NOT using PDFs files."
+    )
+    console.print(
+        "\t     -> [bright_green] poetry run infomaid --resetdb --no-usepdf [/bright_green]"
+    )
+
+    console.print(
+        "\t     * Reset and build the internal database NOT using XMLs files."
+    )
+    console.print(
+        "\t     -> [bright_green] poetry run infomaid --resetdb --no-usexml [/bright_green]"
+    )
 
     console.print("\t + Use pdfs as data source. Ask me for the prompt.")
-    console.print("\t -> [green] poetry run infomaid --usepdfdata [/green]")
+    console.print("\t -> [bright_green] poetry run infomaid --usepdfdata [/bright_green]")
 
     console.print("\t + Query pdfs with supplied prompt and provide two outputs")
     console.print(
-        '\t -> [green] poetry run infomaid --count 2 --usepdfdata --prompt "what is the main idea of the article?" [/green]'
+        '\t -> [bright_green] poetry run infomaid --count 2 --usepdfdata --prompt "what is the main idea of the article?" [/bright_green]'
     )
     console.print(
         "\t + Use the prompt details of the supplied file for generative AI results"
     )
     console.print(
-        "\t -> [green] poetry run infomaid --promptfile promptFiles/tell_me_a_joke.txt [/green]"
+        "\t -> [bright_green] poetry run infomaid --promptfile promptFiles/tell_me_a_joke.txt [/bright_green]"
     )
 
 
