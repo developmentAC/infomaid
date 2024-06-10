@@ -101,7 +101,7 @@ def main(
     if len(prompt) > 0:
         if not useOwnData:
             for i in range(int(count)):
-                myStory = tellStory(prompt, model)  # us ollama to generate the story.
+                myStory = tellStory(prompt, model)  # use ollama to generate the story.
                 saveFile(myStory, model)  # Save the story as a file
 
         if useOwnData:  # chat with pdfs
