@@ -185,15 +185,19 @@ def add_to_chroma(chunks: list[Document], myModel: str):
             )
             new_chunk_ids = [chunk.metadata["id"] for chunk in new_chunks]
             db.add_documents(new_chunks, ids=new_chunk_ids)
-            # db.persist() # deprecated?
+
         else:
-            print("\t ✅ No new documents to add")
+            console.print("\t []bright_green]✅ No new documents to add.[/bright_green]")
 
     except Exception:
         console.print(
-            "\t :poop: [red]There seems to be a problem. Is Ollama server installed and running?[/red]"
+            "\t  :scream: [red]There appears to be no connection to Ollama or to a model. Is Ollama client running? Has the model been loaded?\n\t  Try this command: ollama pull name-your-model \n\t  Exiting... [/red]"
         )
         exit()
+        # console.print(
+        #     "\t :poop: [red]There seems to be a problem. Is Ollama server installed and running?[/red]"
+        # )
+        # exit()
 
     # console.print("end of add_to_chroma()") # for debugging
 

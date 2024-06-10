@@ -253,7 +253,7 @@ def tellStory(storySeed: str, myModel) -> str:
         )
     except Exception:
         console.print(
-            "\t  :scream: [red]There appears to be no connection to Ollama. Is Ollama client running?[/red]\n\t  Exiting... "
+            "\t  :scream: [red]There appears to be no connection to Ollama or to a model. Is Ollama client running? Has the model been loaded?\n\t  Try this command: ollama pull name-your-model \n\t  Exiting... [/red]"
         )
         exit()
     myStory = f"# Infomaid\n\n{INFOMAID_WEB}\n\n## Prompt\n\n{storySeed}\n\n## Story\n\n {response['message']['content']}\n\n"
