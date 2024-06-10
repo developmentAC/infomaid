@@ -76,20 +76,28 @@ def main(
                 "\t[bright_green] What kind of AI help do you need? [/bright_green] :"
             )
             if len(seed) == 0:  # nothing entered
-                console.print("\t[bright_red] Nothing entered. Exiting ...[/bright_red]")
+                console.print(
+                    "\t[bright_red] Nothing entered. Exiting ...[/bright_red]"
+                )
                 raise typer.Abort()
             prompt = seed
     else:
         if promptfile.is_file():
             seed = promptfile.read_text()
-            console.print(f"[bright_green]The data file that contains the input is: {seed}[bright_green]")
+            console.print(
+                f"[bright_green]The data file that contains the input is: {seed}[bright_green]"
+            )
             prompt = seed
         else:
             console.print(f"\t:scream: Bad filename entered")
             raise typer.Abort()
-    console.print(f"\t [bright_cyan] Code prompt:\n\t[bright_yellow]  {prompt}[/bright_yellow]")
+    console.print(
+        f"\t [bright_cyan] Code prompt:\n\t[bright_yellow]  {prompt}[/bright_yellow]"
+    )
     console.print(f"\t [bright_cyan] Model: {model}[/bright_cyan]")
-    console.print(f"\t [bright_cyan] Number of stories to create: {count}[/bright_cyan]")
+    console.print(
+        f"\t [bright_cyan] Number of stories to create: {count}[/bright_cyan]"
+    )
     if len(prompt) > 0:
         if not useOwnData:
             for i in range(int(count)):
@@ -120,7 +128,9 @@ def getBigHelp() -> None:
 \t╚═╝╚═╝  ╚═══╝╚═╝      ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚═════╝ 
 
 """
-    randomColour = random.choice(["bright_green", "bright_blue", "bright_red", "bright_yellow", "bright_cyan"])
+    randomColour = random.choice(
+        ["bright_green", "bright_blue", "bright_red", "bright_yellow", "bright_cyan"]
+    )
     console.print(f"\t[{randomColour}]{banner}\t{INFOMAID_WEB}\n[/{randomColour}]")
 
     # Banner art: https://manytools.org/hacker-tools/ascii-banner/
@@ -137,27 +147,31 @@ def getBigHelp() -> None:
         '\t\t-> [bright_green] poetry run infomaid --count 2 --prompt "describe four breeds of dogs" [/bright_green]'
     )
 
-    console.print("\t + Reset and build own model trained model with local data,\n\t\t use --usepdf or ---usexml options.")
+    console.print(
+        "\t + Reset and build own model trained model with local data,\n\t\t use --usepdf or ---usexml options."
+    )
     console.print("\t\t-> [bright_green] poetry run infomaid --resetdb [/bright_green]")
 
-    console.print(
-        "\t   * Reset and build own model trained model with PDF files."
-    )
+    console.print("\t   * Reset and build own model trained model with PDF files.")
     console.print(
         "\t\t-> [bright_green] poetry run infomaid --resetdb --usepdf [/bright_green]"
     )
 
-    console.print(
-        "\t   * Reset and build own model trained model with XMLs files."
-    )
+    console.print("\t   * Reset and build own model trained model with XMLs files.")
     console.print(
         "\t\t-> [bright_green] poetry run infomaid --resetdb --usexml [/bright_green]"
     )
 
-    console.print("\t + Use own model trained model as data source. Ask me for the prompt.")
-    console.print("\t\t-> [bright_green] poetry run infomaid --useowndata [/bright_green]")
+    console.print(
+        "\t + Use own model trained model as data source. Ask me for the prompt."
+    )
+    console.print(
+        "\t\t-> [bright_green] poetry run infomaid --useowndata [/bright_green]"
+    )
 
-    console.print("\t + Query own model trained model with supplied prompt and provide output.")
+    console.print(
+        "\t + Query own model trained model with supplied prompt and provide output."
+    )
     console.print(
         '\t\t-> [bright_green] poetry run infomaid --useowndata --prompt "Whose name is on the included CV?" [/bright_green]'
     )
@@ -167,7 +181,8 @@ def getBigHelp() -> None:
     console.print(
         "\t\t-> [bright_green] poetry run infomaid --promptfile promptFiles/tell_me_a_joke.txt [/bright_green]"
     )
-    return "getBigHelp" #for testing
+    return "getBigHelp"  # for testing
+
 
 # end of getBigHelp()
 
@@ -249,7 +264,7 @@ def tellStory(storySeed: str, myModel) -> str:
 
 
 def formatOutput(storySeed: str, response) -> None:
-    """ For use with output from own data. This function places output in Markdown formatting. """
+    """For use with output from own data. This function places output in Markdown formatting."""
     # console.print(f"[yellow]formatOutput()[/yellow]") # for debugging
     console.print(
         f"[green]\t  STORYSEED: {storySeed}\n\t  RESPONSE: {response}[/green]"

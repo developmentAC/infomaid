@@ -6,6 +6,7 @@
 import argparse
 import os
 import shutil
+
 # from langchain.document_loaders.pdf import PyPDFDirectoryLoader # deprecated code
 from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -18,6 +19,7 @@ from langchain_core.documents import Document
 
 # from get_embedding_function import get_embedding_function
 from infomaid import get_embedding_function
+
 # from langchain.vectorstores.chroma import Chroma # deprecated code
 from langchain_community.vectorstores import Chroma
 
@@ -34,11 +36,15 @@ def main(resetDB: bool, myModel: str, usePDF: bool, useXML: bool) -> None:
     # console.print("\t This is populate_databases.main()")
     if not usePDF and not useXML:
         console.print("\t :scream: [bright_green]Nothing to do![/bright_green]")
-        console.print("\t [bright_cyan]Note: Use options: [bright_yellow]--usepdf[/bright_yellow] or [bright_yellow]--usexml [/bright_yellow]")
+        console.print(
+            "\t [bright_cyan]Note: Use options: [bright_yellow]--usepdf[/bright_yellow] or [bright_yellow]--usexml [/bright_yellow]"
+        )
         exit()
 
-    console.print(f"\t[bright_green] :rocket: Resetting database:[bright_yellow] {resetDB}[/bright_yellow]")
-    
+    console.print(
+        f"\t[bright_green] :rocket: Resetting database:[bright_yellow] {resetDB}[/bright_yellow]"
+    )
+
     if resetDB:  # clear out old data from the database
         console.print("\t :rocket: [bright_green]Clearing Database[/bright_green]")
         clear_database()
@@ -66,6 +72,7 @@ def main(resetDB: bool, myModel: str, usePDF: bool, useXML: bool) -> None:
 
     console.print("\t :smiley: [bright_green]Populating complete![/bright_green]")
 
+
 # end of main()
 
 
@@ -77,9 +84,7 @@ def load_documents_PDF():
     )  # length is the number of articles found
     console.print("\t [bright_green]:sparkles: Found files ... [/bright_green]")
     for thisFile in myFiles_list:
-        console.print(
-            f"\t [cyan]File :[bright_yellow] {thisFile}[/bright_yellow]"
-        )
+        console.print(f"\t [cyan]File :[bright_yellow] {thisFile}[/bright_yellow]")
     document_loader = PyPDFDirectoryLoader(DATA_PATH)
     return document_loader.load()
 
@@ -175,7 +180,9 @@ def add_to_chroma(chunks: list[Document], myModel: str):
     try:
 
         if len(new_chunks):
-            console.print(f"\t [bright_green]👉 Adding new documents: [bright_yellow]{len(new_chunks)}[/bright_yellow]")
+            console.print(
+                f"\t [bright_green]👉 Adding new documents: [bright_yellow]{len(new_chunks)}[/bright_yellow]"
+            )
             new_chunk_ids = [chunk.metadata["id"] for chunk in new_chunks]
             db.add_documents(new_chunks, ids=new_chunk_ids)
             # db.persist() # deprecated?
