@@ -14,7 +14,7 @@ from infomaid import query_data
 # Some code associated with reading PDF documents taken from;
 # ref: https://github.com/pixegami/rag-tutorial-v2/tree/main
 # ref: https://github.com/ollama/ollama-python
-
+INFOMAID_WEB = "https://github.com/developmentAC/infomaid"
 
 # globals
 OUTPUTDIR = "0_out/"  # output directory
@@ -121,7 +121,7 @@ def getBigHelp() -> None:
 
 """
     randomColour = random.choice(["bright_green", "bright_blue", "bright_red", "bright_yellow", "bright_cyan"])
-    console.print(f"\t[{randomColour}]{banner}[/{randomColour}]")
+    console.print(f"\t[{randomColour}]{banner}\t{INFOMAID_WEB}\n[/{randomColour}]")
 
     # Banner art: https://manytools.org/hacker-tools/ascii-banner/
 
@@ -224,7 +224,7 @@ def getNumber(myModel) -> int:
 
 
 def tellStory(storySeed: str, myModel) -> str:
-    """Generate the story by submitting the seed to the ollama AI app."""
+    """Generate the story by submitting the seed to the ollama AI app. Format output as Markdown."""
 
     try:
         response = ollama.chat(
@@ -241,7 +241,7 @@ def tellStory(storySeed: str, myModel) -> str:
             "\t  :scream: [red]There appears to be no connection to Ollama. Is Ollama client running?[/red]\n\t  Exiting... "
         )
         exit()
-    myStory = f"# infomaid\n\n## Prompt\n\n{storySeed}\n\n## Story\n\n {response['message']['content']}\n\n"
+    myStory = f"# Infomaid\n\n{INFOMAID_WEB}\n\n## Prompt\n\n{storySeed}\n\n## Story\n\n {response['message']['content']}\n\n"
     return myStory
 
 
@@ -249,12 +249,12 @@ def tellStory(storySeed: str, myModel) -> str:
 
 
 def formatOutput(storySeed: str, response) -> None:
-    """ format the output as Markdown text. """
+    """ For use with output from own data. This function places output in Markdown formatting. """
     # console.print(f"[yellow]formatOutput()[/yellow]") # for debugging
     console.print(
         f"[green]\t  STORYSEED: {storySeed}\n\t  RESPONSE: {response}[/green]"
     )
-    myStory = f"# infomaid\n\n## Prompt\n\n {storySeed} \n\n## Story\n\n {response}\n\n"
+    myStory = f"# Infomaid\n\n{INFOMAID_WEB}\n\n## Prompt\n\n {storySeed} \n\n## Story\n\n {response}\n\n"
     return myStory
 
 
