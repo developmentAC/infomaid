@@ -127,45 +127,45 @@ def getBigHelp() -> None:
 
     console.print("\t + Ask a silly question of generative AI!")
     console.print(
-        '\t -> [bright_green] poetry run infomaid --prompt "name four shapes" [/bright_green]'
+        '\t\t-> [bright_green] poetry run infomaid --prompt "name four shapes" [/bright_green]'
     )
 
     console.print(
         "\t + Use general chat, give me two results to consider, not using pdf data"
     )
     console.print(
-        '\t -> [bright_green] poetry run infomaid --count 2 --prompt "describe four breeds of dogs" [/bright_green]'
+        '\t\t-> [bright_green] poetry run infomaid --count 2 --prompt "describe four breeds of dogs" [/bright_green]'
     )
 
-    console.print("\t + Reset and build the internal database with local data, use --usepdf or ---usexml options.")
-    console.print("\t -> [bright_green] poetry run infomaid --resetdb [/bright_green]")
+    console.print("\t + Reset and build own model trained model with local data,\n\t\t use --usepdf or ---usexml options.")
+    console.print("\t\t-> [bright_green] poetry run infomaid --resetdb [/bright_green]")
 
     console.print(
-        "\t     * Reset and build the internal database NOT using PDFs files."
+        "\t   * Reset and build own model trained model with PDF files."
     )
     console.print(
-        "\t     -> [bright_green] poetry run infomaid --resetdb --no-usepdf [/bright_green]"
-    )
-
-    console.print(
-        "\t     * Reset and build the internal database NOT using XMLs files."
-    )
-    console.print(
-        "\t     -> [bright_green] poetry run infomaid --resetdb --no-usexml [/bright_green]"
+        "\t\t-> [bright_green] poetry run infomaid --resetdb --usepdf [/bright_green]"
     )
 
-    console.print("\t + Use pdfs as data source. Ask me for the prompt.")
-    console.print("\t -> [bright_green] poetry run infomaid --usepdfdata [/bright_green]")
-
-    console.print("\t + Query pdfs with supplied prompt and provide two outputs")
     console.print(
-        '\t -> [bright_green] poetry run infomaid --count 2 --usepdfdata --prompt "what is the main idea of the article?" [/bright_green]'
+        "\t   * Reset and build own model trained model with XMLs files."
+    )
+    console.print(
+        "\t\t-> [bright_green] poetry run infomaid --resetdb --usexml [/bright_green]"
+    )
+
+    console.print("\t + Use own model trained model as data source. Ask me for the prompt.")
+    console.print("\t\t-> [bright_green] poetry run infomaid --useowndata [/bright_green]")
+
+    console.print("\t + Query own model trained model with supplied prompt and provide output.")
+    console.print(
+        '\t\t-> [bright_green] poetry run infomaid --useowndata --prompt "Whose name is on the included CV?" [/bright_green]'
     )
     console.print(
         "\t + Use the prompt details of the supplied file for generative AI results"
     )
     console.print(
-        "\t -> [bright_green] poetry run infomaid --promptfile promptFiles/tell_me_a_joke.txt [/bright_green]"
+        "\t\t-> [bright_green] poetry run infomaid --promptfile promptFiles/tell_me_a_joke.txt [/bright_green]"
     )
 
 
@@ -225,7 +225,6 @@ def getNumber(myModel) -> int:
 
 def tellStory(storySeed: str, myModel) -> str:
     """Generate the story by submitting the seed to the ollama AI app."""
-    # storySeed = "Please,  " + storySeed # if we need to add details to prompt...
 
     try:
         response = ollama.chat(
@@ -242,8 +241,7 @@ def tellStory(storySeed: str, myModel) -> str:
             "\t  :scream: [red]There appears to be no connection to Ollama. Is Ollama client running?[/red]\n\t  Exiting... "
         )
         exit()
-    # response = formatOutput(storySeed, response)
-    myStory = f"# infomaid\n\n## Prompt: {storySeed}\n\n## Story\n {response['message']['content']}\n\n"
+    myStory = f"# infomaid\n\n## Prompt\n\n{storySeed}\n\n## Story\n\n {response['message']['content']}\n\n"
     return myStory
 
 
@@ -255,7 +253,7 @@ def formatOutput(storySeed: str, response) -> None:
     console.print(
         f"[green]\t  STORYSEED: {storySeed}\n\t  RESPONSE: {response}[/green]"
     )
-    myStory = f"# infomaid\n\n## Prompt: {storySeed} \n\n## Story\n {response}\n\n"
+    myStory = f"# infomaid\n\n## Prompt\n\n {storySeed} \n\n## Story\n\n {response}\n\n"
     return myStory
 
 
