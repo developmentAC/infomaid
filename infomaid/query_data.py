@@ -58,4 +58,6 @@ def query_rag(query_text: str, myModel: str):
 
     model = Ollama(model="mistral")
     response_text = model.invoke(prompt)
+    #debugging 
+    console.print(f"[bright_blue]{response_text}[/bright_blue]")
     return response_text

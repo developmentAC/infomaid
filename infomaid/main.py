@@ -167,9 +167,9 @@ def getBigHelp() -> None:
     console.print(
         "\t\t-> [bright_green] poetry run infomaid --promptfile promptFiles/tell_me_a_joke.txt [/bright_green]"
     )
+    return "getBigHelp" #for testing
 
-
-# end of bighelp()
+# end of getBigHelp()
 
 
 def getNumber(myModel) -> int:

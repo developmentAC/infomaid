@@ -1,54 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Parts of this code taken from reference: https://github.com/pixegami/rag-tutorial-v2
-
-from query_data import query_rag
+# from query_data import query_rag
+from infomaid import query_data as qd
 from langchain_community.llms.ollama import Ollama
 
-EVAL_PROMPT = """
-Expected Response: {expected_response}
-Actual Response: {actual_response}
----
-(Answer with 'true' or 'false') Does the actual response match the expected response? 
-"""
+from infomaid import main as m
 
+def test_bighelp():
+    """dummyTest"""
+    assert m.getBigHelp() =="getBigHelp"
 
-def test_monopoly_rules():
-    assert query_and_validate(
-        question="How much total money does a player start with in Monopoly? (Answer with the number only)",
-        expected_response="$1500",
-    )
-
-
-def test_ticket_to_ride_rules():
-    assert query_and_validate(
-        question="How many points does the longest continuous train get in Ticket to Ride? (Answer with the number only)",
-        expected_response="10 points",
-    )
-
-
-def query_and_validate(question: str, expected_response: str):
-    response_text = query_rag(question)
-    prompt = EVAL_PROMPT.format(
-        expected_response=expected_response, actual_response=response_text
-    )
-
-    model = Ollama(model="mistral")
-    evaluation_results_str = model.invoke(prompt)
-    evaluation_results_str_cleaned = evaluation_results_str.strip().lower()
-
-    print(prompt)
-
-    if "true" in evaluation_results_str_cleaned:
-        # Print response in Green if it is correct.
-        print("\033[92m" + f"Response: {evaluation_results_str_cleaned}" + "\033[0m")
-        return True
-    elif "false" in evaluation_results_str_cleaned:
-        # Print response in Red if it is incorrect.
-        print("\033[91m" + f"Response: {evaluation_results_str_cleaned}" + "\033[0m")
-        return False
-    else:
-        raise ValueError(
-            f"Invalid evaluation result. Cannot determine if 'true' or 'false'."
-        )
+def test_astroBillStreetAddress():
+    """testing the basic query code"""
+    query_text="What street does AstroBill live on. Answer with the street name only."
+    expected_response="Celestial Street"
+    useThisModel = "nomic-embed-text"
+    assert expected_response in qd.query_rag(query_text, useThisModel) 
