@@ -249,6 +249,7 @@ def tellStory(storySeed: str, myModel) -> str:
 
 
 def formatOutput(storySeed: str, response) -> None:
+    """ format the output as Markdown text. """
     # console.print(f"[yellow]formatOutput()[/yellow]") # for debugging
     console.print(
         f"[green]\t  STORYSEED: {storySeed}\n\t  RESPONSE: {response}[/green]"
