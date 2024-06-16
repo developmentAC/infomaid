@@ -22,6 +22,7 @@ Email: obonhamcarter at allegheny.edu
 + [Output](#output)
 + [Working with PDF Data](#working-with-pdf-data)
 + [Sample Project](#sample-project)
++ [Testing the Code](#testing-the-code)
 + [Ethical Note](#ethical-note)
 + [A Work In Progress](#a-work-in-progress)
 
@@ -219,6 +220,18 @@ In summary, AstroBill's unique blend of intellect, creativity, adaptability, det
 ```
 
 (Or whatever!! Now the letter can be edited to add a _human-touch_ and extra value.)
+
+## Testing the Code
+
+The code may be tested to determine functionality. At present, there are two tests; (1) general execution and (2) to determine whether the querying system if working for pdf data.
+
+To run tests using `pytest` which is already installed, use the below commands.
+
+``` python
+poetry install # initialize project
+poetry run infomaid --resetdb --usepdf # populate pdf db
+poetry run pytest # run tests with the pdf database.
+```
 
 ## Ethical Note
 
