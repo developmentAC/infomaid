@@ -1,8 +1,8 @@
-# Infomaid: An AI and RAG-Enabled Learning Application
+# Infomaid: A Textual AI and RAG-Enabled Learning Application
 
 ![logo](graphics/infomaid_logo_yellow.png)
 
-Date: 4 June 2024
+Date: 17 October 2024
 
 [Oliver Bonham-Carter](https://www.oliverbonhamcarter.com/)
 
@@ -10,21 +10,23 @@ Email: obonhamcarter at allegheny.edu
 
 [![MIT Licence](https://img.shields.io/bower/l/bootstrap)](https://opensource.org/licenses/MIT)
 
-## Contents
+## Table of Contents
 
-+ [Overview](#overview)
-+ [Prerequisites](#Prerequisites)
-+ [Set Up Local Models for Ollama](#set-up-local-models-for-ollama)
-+ [Setting Up The Project](#Setting-up-the-project)
-+ [Execution](#Execution)
-+ [Parameters](#Parameters)
-+ [Generation](#generation)
-+ [Output](#output)
-+ [Working with PDF Data](#working-with-pdf-data)
-+ [Sample Project](#sample-project)
-+ [Testing the Code](#testing-the-code)
-+ [Ethical Note](#ethical-note)
-+ [A Work In Progress](#a-work-in-progress)
+- [Infomaid: A Textual AI and RAG-Enabled Learning Application](#infomaid-a-textual-ai-and-rag-enabled-learning-application)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Prerequisites](#prerequisites)
+    - [Set Up Local Models for Ollama](#set-up-local-models-for-ollama)
+  - [Setting Up the Project](#setting-up-the-project)
+  - [Execution](#execution)
+    - [Parameters](#parameters)
+    - [Generation](#generation)
+      - [Output](#output)
+    - [Working with PDF Data](#working-with-pdf-data)
+      - [Sample Project](#sample-project)
+  - [Testing the Code](#testing-the-code)
+  - [Ethical Note](#ethical-note)
+  - [A Work In Progress](#a-work-in-progress)
 
 ## Overview
 
@@ -131,8 +133,8 @@ poetry run infomaid --count 2 --usepdfdata --prompt "what is the article's main 
 ```
 
 ## Execution
-### Parameters
 
+### Parameters
 
 + __bighelp__ - Provides CLI commands to use the project.
 
