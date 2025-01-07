@@ -3,7 +3,6 @@
 
 # Parts of this code taken from reference: https://github.com/pixegami/rag-tutorial-v2
 
-import argparse
 import os
 import shutil
 import nltk
@@ -54,12 +53,12 @@ def setupNLTK() -> str:
 # end of setupNLTK()
 
 
-def main(resetDB: bool, myModel: str, usePDF: bool, useXML: bool, useTXT: bool) -> None:
+def main(resetDB: bool, myModel: str, usePDF: bool, useXML: bool, useTXT: bool, useCSV: bool) -> None:
     # console.print("\t This is populate_databases.main()")
-    if not usePDF and not useXML and not useTXT:
+    if not usePDF and not useXML and not useTXT and not useCSV:
         console.print("\t :scream: [bright_green]Nothing to do![/bright_green]")
         console.print(
-            "\t [bright_cyan]Note: Use options: [bright_yellow]--usepdf[/bright_yellow] or [bright_yellow]--usexml [/bright_yellow]"
+            "\t [bright_cyan]Note: Use options: [bright_yellow]--usepdf[/bright_yellow], [bright_yellow]--usexml [/bright_yellow], [bright_yellow]--usetxt[/bright_yellow] or [bright_yellow]--usecsv[/bright_yellow]"
         )
         exit()
 
@@ -80,7 +79,7 @@ def main(resetDB: bool, myModel: str, usePDF: bool, useXML: bool, useTXT: bool) 
         try:
             documentsPDF_list = load_documents_PDF()
         except Exception:
-            console.print("\t :scream:[bright_red] There seems to be a unexpected file with < pdf > in the\n\t filename in < data/ >. Please check your files and try again.[/bright_red]")
+            console.print("\n:scream:[bright_red] Error: Unexpected issue with PDF files in the data/ directory.\n\t Please check your files and try again.[/bright_red]\n")
             exit()
         # print(f"use pdf; documents: {documentsPDF_list}, {type(documentsPDF_list)}") # returns a list
         #   input("Current Chunk above. Press any key to continue!!")
@@ -88,12 +87,14 @@ def main(resetDB: bool, myModel: str, usePDF: bool, useXML: bool, useTXT: bool) 
         add_to_chroma(chunks, myModel)
         # console.print("\t :smiley: Populating complete")
 
+# Process XML documents if the useXML flag is set.
+
     if useXML:
         # print(f"  +++ Using option : useXML: {useXML}")
         try:
             documentsXML_list = load_documents_NXML()
         except Exception:
-            console.print("\t :scream:[bright_red] There seems to be a unexpected file with < xml > in the\n\t filename in < data/ >. Please check your files and try again.[/bright_red]")
+            console.print("\n:scream:[bright_red] Error: Unexpected issue with NXML files in the data/ directory.\n\t Please check your files and try again.[/bright_red]\n")
             exit()
         # console.print(f"[cyan]main() documentsXML_list : [bright_yellow]{documentsXML_list}[/bright_yellow]") #list
         for i in range(len(documentsXML_list)):
@@ -101,13 +102,14 @@ def main(resetDB: bool, myModel: str, usePDF: bool, useXML: bool, useTXT: bool) 
             # print(f"{i}: useXML chunks : {chunks}")
             #   input("Current Chunk above. Press any key to continue!!")
             add_to_chroma(chunks, myModel)
+# Process TXT documents if the useTXT flag is set.
 
     if useTXT:
         # print(f"  +++ Using option : useTXT: {useTXT}")
         try:
             documentsTXT_list = load_documents_TEXT()
         except Exception:
-            console.print("\t :scream:[bright_red] There seems to be a unexpected file with < txt > in the\n\t filename in < data/ >. Please check your files and try again.[/bright_red]")
+            console.print("\n:scream:[bright_red] Error: Unexpected issue with TXT files in the data/ directory.\n\t Please check your files and try again.[/bright_red]\n")
             exit()            
         # console.print(f"[cyan]main() documentsXML_list : [bright_yellow]{documentsXML_list}[/bright_yellow]") #list
         for i in range(len(documentsTXT_list)):
@@ -115,6 +117,22 @@ def main(resetDB: bool, myModel: str, usePDF: bool, useXML: bool, useTXT: bool) 
             # print(f"{i}: useXML chunks : {chunks}")
             #   input("Current Chunk above. Press any key to continue!!")
             add_to_chroma(chunks, myModel)
+
+# Process CSV documents if the useCSV flag is set.
+
+    if useCSV:
+        # print(f"  +++ Using option : useCSV: {useCSV}")
+        try:
+            documentsCSV_list = load_documents_CSV()
+        except Exception:
+            console.print("\n:scream:[bright_red] Error: Unexpected issue with CSV files in the data/ directory.\n\t Please check your files and try again.[/bright_red]\n")
+            exit()
+        
+        for document in documentsCSV_list:
+            chunks = split_documents(document)
+            chunks_with_ids = calculate_chunk_ids(chunks)
+            add_to_chroma(chunks_with_ids, myModel)
+
 
     console.print("\t :smiley: [bright_green]Populating complete![/bright_green]")
 
@@ -165,7 +183,7 @@ def load_documents_NXML():
 
 def load_documents_TEXT():
     """A function to load the xml files, to produce document objects to store in a dictionary; key:filename, value: document object."""
-    # print("This is load_documents_NXML()")
+    # print("This is load_documents_TEXT()")
 
     myArticles_list = []  # list to contain all article documents
     # find which files we are working with
@@ -180,7 +198,7 @@ def load_documents_TEXT():
         )
         loader = TextLoader(
             currentFile_str,
-        )  # open, parse nxml documents
+        )  # open, parse txt documents
         docs = loader.load()
         myArticles_list.append(docs)
     return myArticles_list
@@ -188,6 +206,30 @@ def load_documents_TEXT():
 
 # end of load_documents_TEXT()
 
+def load_documents_CSV():
+    """A function to load the xml files, to produce document objects to store in a dictionary; key:filename, value: document object."""
+    # print("This is load_documents_CSV()")
+
+    myArticles_list = []  # list to contain all article documents
+    # find which files we are working with
+    myFiles_list = get_files_list_from_directory(
+        DATA_PATH, "csv"
+    )  # length is the number of articles found
+    # print(f"myFiles_list: myFiles_list, LENGTH = {len(myFiles_list)}")
+    for thisFile in myFiles_list:
+        currentFile_str = thisFile
+        console.print(
+            f"\t [bright_cyan]Current File :[bright_yellow] {currentFile_str}[/bright_yellow]"
+        )
+        loader = TextLoader(
+            currentFile_str,
+        )  # open, parse csv documents
+        docs = loader.load()
+        myArticles_list.append(docs)
+    return myArticles_list
+
+
+# end of load_documents_CSV()
 
 def get_files_list_from_directory(directory, myFileExt_str):
     """A function to determine the nxml files from the directory. Return a list of files with paths. myFileExt_str is the extension for types of files that we want to list (i.e., pdf, nxml or other type.)"""

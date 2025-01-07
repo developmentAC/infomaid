@@ -55,6 +55,9 @@ def main(
     useTXT: bool = typer.Option(
         default=False, help="Use TXT documents to populate the database?"
     ),
+    useCSV: bool = typer.Option(
+    default=False, help="Use CSV documents to populate the database?"
+    ),
 ) -> None:
     # """Driver of the program."""
 
@@ -65,7 +68,7 @@ def main(
 
     # reset database
     if resetdb == True:  # command to populate database with pdf
-        populate_database.main(resetdb, pdfmodel, usePDF, useXML, useTXT)
+        populate_database.main(resetdb, pdfmodel, usePDF, useXML, useTXT, useCSV)
         exit()
     #
     seed = None
@@ -168,6 +171,11 @@ def getBigHelp() -> None:
     console.print("\t   * Reset and build own model trained model with TXT files.")
     console.print(
         "\t\t-> [bright_green] poetry run infomaid --resetdb --usetxt [/bright_green]"
+    )
+
+    console.print("\t   * Reset and build own model trained model with CSV files.")
+    console.print(
+        "\t\t-> [bright_green] poetry run infomaid --resetdb --usecsv [/bright_green]"
     )
 
     console.print(
