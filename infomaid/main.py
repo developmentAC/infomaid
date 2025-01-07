@@ -52,6 +52,9 @@ def main(
     useXML: bool = typer.Option(
         default=False, help="Use XML documents to populate the database?"
     ),
+    useTXT: bool = typer.Option(
+        default=False, help="Use TXT documents to populate the database?"
+    ),
 ) -> None:
     # """Driver of the program."""
 
@@ -62,7 +65,7 @@ def main(
 
     # reset database
     if resetdb == True:  # command to populate database with pdf
-        populate_database.main(resetdb, pdfmodel, usePDF, useXML)
+        populate_database.main(resetdb, pdfmodel, usePDF, useXML, useTXT)
         exit()
     #
     seed = None
@@ -157,9 +160,14 @@ def getBigHelp() -> None:
         "\t\t-> [bright_green] poetry run infomaid --resetdb --usepdf [/bright_green]"
     )
 
-    console.print("\t   * Reset and build own model trained model with XMLs files.")
+    console.print("\t   * Reset and build own model trained model with XML files.")
     console.print(
         "\t\t-> [bright_green] poetry run infomaid --resetdb --usexml [/bright_green]"
+    )
+
+    console.print("\t   * Reset and build own model trained model with TXT files.")
+    console.print(
+        "\t\t-> [bright_green] poetry run infomaid --resetdb --usetxt [/bright_green]"
     )
 
     console.print(

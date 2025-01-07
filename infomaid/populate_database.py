@@ -6,6 +6,7 @@
 import argparse
 import os
 import shutil
+import nltk
 
 # from langchain.document_loaders.pdf import PyPDFDirectoryLoader # deprecated code
 from langchain_community.document_loaders import PyPDFDirectoryLoader
@@ -14,6 +15,8 @@ from langchain.schema.document import Document
 
 from langchain_community.document_loaders import UnstructuredXMLLoader
 from langchain_community.document_loaders import UnstructuredMarkdownLoader
+from langchain_community.document_loaders import TextLoader
+
 from langchain_core.documents import Document
 
 
@@ -31,10 +34,29 @@ DATA_PATH = "data"
 
 console = Console()
 
+def setupNLTK() -> str:
+    """ A function to install NLTK word banks in the local directory."""
 
-def main(resetDB: bool, myModel: str, usePDF: bool, useXML: bool) -> None:
+    # Define a local directory for storing NLTK data
+    local_nltk_dir = os.path.join(os.getcwd(), "nltk_data")
+
+    # Ensure the directory exists
+    os.makedirs(local_nltk_dir, exist_ok=True)
+
+    # Set the NLTK data path to the local directory
+    nltk.data.path.append(local_nltk_dir)
+
+    # Download the 'averaged_perceptron_tagger_eng' package to the local directory
+    nltk.download('averaged_perceptron_tagger_eng', download_dir=local_nltk_dir)
+
+    print(f"Downloaded 'averaged_perceptron_tagger_eng' to {local_nltk_dir}")
+
+# end of setupNLTK()
+
+
+def main(resetDB: bool, myModel: str, usePDF: bool, useXML: bool, useTXT: bool) -> None:
     # console.print("\t This is populate_databases.main()")
-    if not usePDF and not useXML:
+    if not usePDF and not useXML and not useTXT:
         console.print("\t :scream: [bright_green]Nothing to do![/bright_green]")
         console.print(
             "\t [bright_cyan]Note: Use options: [bright_yellow]--usepdf[/bright_yellow] or [bright_yellow]--usexml [/bright_yellow]"
@@ -48,12 +70,18 @@ def main(resetDB: bool, myModel: str, usePDF: bool, useXML: bool) -> None:
     if resetDB:  # clear out old data from the database
         console.print("\t :rocket: [bright_green]Clearing Database[/bright_green]")
         clear_database()
+        console.print("\t :sparkles: [bright_cyan]Setting up language models in local directory ...[/bright_cyan]")
+        setupNLTK() # install language models for txt and nxml tasks
 
     if usePDF:
         # print(f"  +++ Using option : usePDF: {usePDF}")
 
         # Create (or update) the data store.
-        documentsPDF_list = load_documents_PDF()
+        try:
+            documentsPDF_list = load_documents_PDF()
+        except Exception:
+            console.print("\t :scream:[bright_red] There seems to be a unexpected file with < pdf > in the\n\t filename in < data/ >. Please check your files and try again.[/bright_red]")
+            exit()
         # print(f"use pdf; documents: {documentsPDF_list}, {type(documentsPDF_list)}") # returns a list
         #   input("Current Chunk above. Press any key to continue!!")
         chunks = split_documents(documentsPDF_list)
@@ -62,10 +90,28 @@ def main(resetDB: bool, myModel: str, usePDF: bool, useXML: bool) -> None:
 
     if useXML:
         # print(f"  +++ Using option : useXML: {useXML}")
-        documentsXML_list = load_documents_NXML()
+        try:
+            documentsXML_list = load_documents_NXML()
+        except Exception:
+            console.print("\t :scream:[bright_red] There seems to be a unexpected file with < xml > in the\n\t filename in < data/ >. Please check your files and try again.[/bright_red]")
+            exit()
         # console.print(f"[cyan]main() documentsXML_list : [bright_yellow]{documentsXML_list}[/bright_yellow]") #list
         for i in range(len(documentsXML_list)):
             chunks = split_documents(documentsXML_list[i])
+            # print(f"{i}: useXML chunks : {chunks}")
+            #   input("Current Chunk above. Press any key to continue!!")
+            add_to_chroma(chunks, myModel)
+
+    if useTXT:
+        # print(f"  +++ Using option : useTXT: {useTXT}")
+        try:
+            documentsTXT_list = load_documents_TEXT()
+        except Exception:
+            console.print("\t :scream:[bright_red] There seems to be a unexpected file with < txt > in the\n\t filename in < data/ >. Please check your files and try again.[/bright_red]")
+            exit()            
+        # console.print(f"[cyan]main() documentsXML_list : [bright_yellow]{documentsXML_list}[/bright_yellow]") #list
+        for i in range(len(documentsTXT_list)):
+            chunks = split_documents(documentsTXT_list[i])
             # print(f"{i}: useXML chunks : {chunks}")
             #   input("Current Chunk above. Press any key to continue!!")
             add_to_chroma(chunks, myModel)
@@ -116,6 +162,31 @@ def load_documents_NXML():
 
 
 # end of load_documents_NXML()
+
+def load_documents_TEXT():
+    """A function to load the xml files, to produce document objects to store in a dictionary; key:filename, value: document object."""
+    # print("This is load_documents_NXML()")
+
+    myArticles_list = []  # list to contain all article documents
+    # find which files we are working with
+    myFiles_list = get_files_list_from_directory(
+        DATA_PATH, "txt"
+    )  # length is the number of articles found
+    # print(f"myFiles_list: myFiles_list, LENGTH = {len(myFiles_list)}")
+    for thisFile in myFiles_list:
+        currentFile_str = thisFile
+        console.print(
+            f"\t [bright_cyan]Current File :[bright_yellow] {currentFile_str}[/bright_yellow]"
+        )
+        loader = TextLoader(
+            currentFile_str,
+        )  # open, parse nxml documents
+        docs = loader.load()
+        myArticles_list.append(docs)
+    return myArticles_list
+
+
+# end of load_documents_TEXT()
 
 
 def get_files_list_from_directory(directory, myFileExt_str):
