@@ -2,7 +2,7 @@
 
 ![logo](graphics/infomaid_logo_yellow.png)
 
-Date: 17 October 2024
+Date: 7 Janurary 2025
 
 [Oliver Bonham-Carter](https://www.oliverbonhamcarter.com/)
 
@@ -68,6 +68,8 @@ Before you start, make sure you have the following softwares installed.
 
 + Ollama: The AI server.
   + [Instructions to install Ollama](https://www.ollama.com/)
+
++ _Special Note_: There are some libraries (i.e., `langchain-ollama` and `langchain-chroma`) that are in the midst of being updated. Until the updates have been made by their own developers, the _Infomaid_ project will show some warning messages as the code is being executed. As far as this developer can determine, the code still works in spite of a few warnings. Check back soon for updates to this code when the libraries are available.
 
 ### Set Up Local Models for Ollama
 
