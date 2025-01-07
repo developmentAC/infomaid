@@ -114,24 +114,24 @@ poetry run infomaid --count 1
 poetry run infomaid --count 2 --prompt "name four shapes"
 ```
 
-+ Reset and build the internal data of pdf data.
++ Reset and build the internal data. Use options `--usepdf`, `--usenxml`, `--usetxt`, or `--usecsv`. Each option will load files of that extension to be used to create a local model for prompting and querying. Note, the option, `--useowndata` will have to be used when chatting with this local mode.
 
 ``` bash
 poetry run infomaid --resetdb
 ```
 
-+ Use pdfs as data source with a provided prompt file (`myPrompt.txt`) in which instructions are provided about what the results should look like.
++ Use pdfs as data source with a prompt file (`myPrompt.txt`) in which you provide instructions for the task.
 
   + Note: if no prompt is supplied, then the program will stop to ask for one during execution.
 
 ``` bash
-poetry run infomaid --usepdfdata --promptfile "promptFiles/myPrompt.txt"
+poetry run infomaid --useowndata --promptfile "promptFiles/myPrompt.txt"
 ```
 
 + Query pdfs with prompt. Provide two outputs.
 
 ``` bash
-poetry run infomaid --count 2 --usepdfdata --prompt "what is the article's main idea?"
+poetry run infomaid --count 2 --useowndata --prompt "what is the article's main idea?"
 ```
 
 ## Execution
@@ -151,7 +151,7 @@ poetry run infomaid --count 2 --usepdfdata --prompt "what is the article's main 
 
 + __prompt__ - The initial set of instructions about what kind of information work to complete using Ollama.
 
-+ __usepdfdata__ - A toggle to specify using RAG support (i.e., PDF data sources). In absence of this parameter at the command line, the _Infomaid_ will not use data from PDF documents.
++ __useowndata__ - A toggle to specify using RAG support with a local model built from PDF, NXML or other sources from the `data/` directory. In absence of this parameter at the command line, the _Infomaid_ will not use data from a local model. Instead, Ollama default model will be called.
 
 + __resetdb__ - PDF documents are placed in the `data/` directory to provide the content to build a dataset with which the user may interacte. To prepare this dataset after documents have been placd in `data/`, the parameter `--resetdb` is used to clear out the former PDF content and to update the dataset with the new PDFs. 
   + Note: Always use this parameter when changing PDF content to avoid informational contamination of the results.
