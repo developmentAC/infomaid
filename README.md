@@ -153,7 +153,7 @@ poetry run infomaid --count 2 --useowndata --prompt "what is the article's main 
 
 + __useowndata__ - A toggle to specify using RAG support with a local model built from PDF, NXML or other sources from the `data/` directory. In absence of this parameter at the command line, the _Infomaid_ will not use data from a local model. Instead, Ollama default model will be called.
 
-+ __resetdb__ - PDF documents are placed in the `data/` directory to provide the content to build a dataset with which the user may interacte. To prepare this dataset after documents have been placd in `data/`, the parameter `--resetdb` is used to clear out the former PDF content and to update the dataset with the new PDFs. 
++ __resetdb__ - PDF documents are placed in the `data/` directory to provide the content to build a dataset with which the user may interact. To prepare this dataset after documents have been placd in `data/`, the parameter `--resetdb` is used to clear out the former PDF content and to update the dataset with the new PDFs. 
   + Note: Always use this parameter when changing PDF content to avoid informational contamination of the results.
 
 ### Generation
