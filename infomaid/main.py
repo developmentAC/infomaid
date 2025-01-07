@@ -56,7 +56,7 @@ def main(
         default=False, help="Use TXT documents to populate the database?"
     ),
     useCSV: bool = typer.Option(
-    default=False, help="Use CSV documents to populate the database?"
+        default=False, help="Use CSV documents to populate the database?"
     ),
 ) -> None:
     # """Driver of the program."""

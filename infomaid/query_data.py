@@ -41,6 +41,9 @@ def main(query_text, myModel):
     return myResult
 
 
+# end of main()
+
+
 def query_rag(query_text: str, myModel: str):
     # console.print("This is query_data.query_rag()") # for debugging
 
@@ -61,3 +64,6 @@ def query_rag(query_text: str, myModel: str):
     # debugging
     console.print(f"[bright_blue]{response_text}[/bright_blue]")
     return response_text
+
+
+# end of query_rag
