@@ -82,7 +82,9 @@ ollama pull nomic-embed-text
 
 ## Setting Up the Project
 
-We will use Poetry to manage the virtual environment for the project. Use `install` to download all the necessary packages for your project.
+We will use Poetry to manage the virtual environment for the project. Use `install` to download all the necessary packages for your project. Note, if you are having trouble installing your project with the below commands using poetry, there are two pyproject files included. The active file, `pyptoject.toml` has been created using Poetry v2.0.1.
+
+If you have not yet updated your Poetry software, then you could perhaps try using the former pyproject file, `pyproject__poetryBeforeVersion2`. To use this `.toml` file with this project, you will have to rename `pyproject__poetryBeforeVersion2` to `pyproject.toml`. Note: this will mean that you will also have to rename the original `pyproject.toml` file at the same time if you are to prevent this file from being overwritten.
 
 ``` bash
 poetry install
