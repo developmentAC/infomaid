@@ -13,23 +13,21 @@ infomaid = "infomaid.main:cli"
 # the project was designed
 # for 3.11 but 3.10 also works
 
-python = ">=3.13,<4" 
-# python = ">=3.13" 
-#python = ">=3.10,<3.13" 
+#python = ">=3.13,<4" 
+#python = ">=3.13" 
+python = ">=3.10,<3.13" 
 typer = "^0.9.0"
 rich = "^13.7.1"
 black = "^24.2.0"
 ollama = "^0.4.6"
-#ollama = "^0.1.7"
 pypdf = "^4.2.0"
 chromadb = "^0.5.0"
 pytest = "^8.2.0"
 unstructured-client = "^0.22.0"
-#unstructured= "^0.6.7"
 unstructured= "^0.14.4"
-#langchain-community = "^0.3.10"
 nltk = "^3.9.1"
 langchain-chroma = "^0.1.4"
+langchain-community = "^0.3.18"
 
 
 
