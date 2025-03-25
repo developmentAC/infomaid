@@ -223,7 +223,7 @@ def getNumber(myModel) -> int:
                     # console.print(f"\t [green]Setting new number : {newNumber}, type(newNumber)[/green]")
                     f.write(str(newNumber))
                     console.print(
-                        f"\t [green] Updated story index file [/green] {newNumber}]"
+                        f"\t [green] Updated story index file [/green] {newNumber}"
                     )
                 except ValueError:
                     print(
