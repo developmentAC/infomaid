@@ -14,6 +14,7 @@ Email: obonhamcarter at allegheny.edu
 
 - [Infomaid: A Textual AI and RAG-Enabled Learning Application](#infomaid-a-textual-ai-and-rag-enabled-learning-application)
   - [Table of Contents](#table-of-contents)
+  - [Pycon 2025 Poster](#pycon-2025-poster)
   - [Overview](#overview)
   - [Prerequisites](#prerequisites)
     - [Set Up Local Models for Ollama](#set-up-local-models-for-ollama)
@@ -27,6 +28,9 @@ Email: obonhamcarter at allegheny.edu
   - [Testing the Code](#testing-the-code)
   - [Ethical Note](#ethical-note)
   - [A Work In Progress](#a-work-in-progress)
+
+## Pycon 2025 Poster
+If you are interested in the _Infomaid_ project, then please check out the [poster](docs/pycon2025_infomaidposter_bonham-carter_i.pdf) that was presented at Pycon 2025 in Pittsburgh, PA. The poster is available as a PDF file.
 
 ## Overview
 
