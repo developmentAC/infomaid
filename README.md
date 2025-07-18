@@ -335,7 +335,7 @@ poetry run python demo_enhanced_rag.py
 
 ## Additional Resources
 
-- [Enhanced RAG Documentation](doc/ENHANCED_RAG_README.md) - Detailed guide to the new enhanced RAG features
+- [Enhanced RAG Documentation](docs/ENHANCED_RAG_README.md) - Detailed guide to the new enhanced RAG features
 - [Implementation Summary](docs/IMPLEMENTATION_SUMMARY.md) - Technical details of the enhancements
 - [Demo Script](tests/demo_enhanced_rag.py) - Interactive demonstration of enhanced features
 
