@@ -35,6 +35,9 @@ chroma/
 poetry.lock
 __pycache__/
 promptFiles/
+data/
+data_test/
+docs/
 
 # NLTK #
 ########
