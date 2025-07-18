@@ -1,7 +1,51 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+"""
+Database Population Module
+
+This module handles the population of the ChromaDB vector database with
+documents from various sources. It supports multiple file formats including
+PDF, text, XML, and Markdown files, with both standard and enhanced document
+processing capabilities.
+
+Key Features:
+    - Multi-format document loading (PDF, TXT, XML, MD)
+    - Document chunking with configurable strategies
+    - Vector embedding generation and storage
+    - Enhanced document processing with smart chunking
+    - Incremental database updates
+    - Rich console output for progress tracking
+
+Document Processing Pipeline:
+    1. Load documents from specified directory
+    2. Split documents into manageable chunks
+    3. Generate vector embeddings
+    4. Store embeddings in ChromaDB
+    5. Provide progress feedback
+
+Supported File Types:
+    - PDF files (.pdf)
+    - Text files (.txt)
+    - XML files (.xml)
+    - Markdown files (.md)
+
+Dependencies:
+    - ChromaDB for vector storage
+    - LangChain for document processing
+    - NLTK for text processing
+    - Rich for enhanced console output
+
+Usage:
+    python populate_database.py
+    python populate_database.py --enhanced  # Uses advanced chunking
+"""
+
 # Parts of this code taken from reference: https://github.com/pixegami/rag-tutorial-v2
+
+# Configure ChromaDB before any other imports to suppress telemetry
+from infomaid.chromadb_config import configure_chromadb
+configure_chromadb()
 
 import os
 import shutil
@@ -22,34 +66,67 @@ from langchain_core.documents import Document
 # from get_embedding_function import get_embedding_function
 from infomaid import get_embedding_function
 
-# from langchain.vectorstores.chroma import Chroma # deprecated code
-from langchain_community.vectorstores import Chroma
+try:
+    from langchain_chroma import Chroma
+except ImportError:
+    # Fallback to the older import if the new package is not available
+    from langchain_community.vectorstores import Chroma
 
 from rich.console import Console
 from infomaid import main
 
-CHROMA_PATH = "chroma"
-DATA_PATH = "data"
+# Import enhanced document processing with graceful fallback
+try:
+    from infomaid.enhanced_document_processor import EnhancedDocumentProcessor
+    ENHANCED_PROCESSING_AVAILABLE = True
+except ImportError:
+    ENHANCED_PROCESSING_AVAILABLE = False
+
+# Configuration constants
+CHROMA_PATH = "chroma"  # Default path to ChromaDB database
+DATA_PATH = "data"      # Default path to document source directory
 
 console = Console()
 
 
 def setupNLTK() -> str:
-    """A function to install NLTK word banks in the local directory."""
+    """
+    Install and configure NLTK word banks in the local directory.
+    
+    This function sets up NLTK data locally to ensure text processing
+    capabilities are available for document processing. It downloads
+    necessary NLTK resources to a local directory to avoid system-wide
+    installation requirements.
+    
+    Returns:
+        str: Path to the local NLTK data directory
+        
+    Side Effects:
+        - Creates local nltk_data directory
+        - Downloads NLTK punkt tokenizer data
+        - Downloads NLTK averaged_perceptron_tagger data
+        - Sets NLTK data path to local directory
+        
+    NLTK Resources Downloaded:
+        - punkt: Sentence tokenization
+        - averaged_perceptron_tagger: Part-of-speech tagging
+    """
 
-    # Define a local directory for storing NLTK data
+    # Define a local directory for storing NLTK data to avoid system dependencies
     local_nltk_dir = os.path.join(os.getcwd(), "nltk_data")
 
-    # Ensure the directory exists
+    # Ensure the directory exists for NLTK data storage
     os.makedirs(local_nltk_dir, exist_ok=True)
 
-    # Set the NLTK data path to the local directory
+    # Set the NLTK data path to the local directory for runtime access
     nltk.data.path.append(local_nltk_dir)
 
     # Download the 'averaged_perceptron_tagger_eng' package to the local directory
+    # This is used for part-of-speech tagging during text processing
     nltk.download("averaged_perceptron_tagger_eng", download_dir=local_nltk_dir)
 
     print(f"Downloaded 'averaged_perceptron_tagger_eng' to {local_nltk_dir}")
+    return local_nltk_dir
 
 
 # end of setupNLTK()
@@ -58,7 +135,42 @@ def setupNLTK() -> str:
 def main(
     resetDB: bool, myModel: str, usePDF: bool, useXML: bool, useTXT: bool, useCSV: bool
 ) -> None:
+    """
+    Main function for populating the database with documents.
+    
+    This function orchestrates the entire database population process,
+    handling different file types and database operations based on
+    user-specified options. It provides a comprehensive pipeline for
+    document ingestion and vector storage.
+    
+    Args:
+        resetDB (bool): Whether to clear existing database before population
+        myModel (str): Embedding model name to use for vector generation
+        usePDF (bool): Whether to process PDF files
+        useXML (bool): Whether to process XML files  
+        useTXT (bool): Whether to process text files
+        useCSV (bool): Whether to process CSV files
+        
+    Returns:
+        None
+        
+    Side Effects:
+        - Clears database if resetDB is True
+        - Sets up NLTK resources if database is reset
+        - Processes and stores documents based on file type flags
+        - Prints progress information to console
+        - Exits if no file types are selected
+        
+    Process Flow:
+        1. Validate that at least one file type is selected
+        2. Clear database if requested
+        3. Set up language models if needed
+        4. Process each selected file type sequentially
+        5. Generate embeddings and store in ChromaDB
+    """
     # console.print("\t This is populate_databases.main()")
+    
+    # Validate that at least one file type option is selected
     if not usePDF and not useXML and not useTXT and not useCSV:
         console.print("\t :scream: [bright_green]Nothing to do![/bright_green]")
         console.print(
@@ -70,14 +182,16 @@ def main(
         f"\t[bright_green] :rocket: Resetting database:[bright_yellow] {resetDB}[/bright_yellow]"
     )
 
-    if resetDB:  # clear out old data from the database
+    # Clear existing database if requested for fresh start
+    if resetDB:  
         console.print("\t :rocket: [bright_green]Clearing Database[/bright_green]")
         clear_database()
         console.print(
             "\t :sparkles: [bright_cyan]Setting up language models in local directory ...[/bright_cyan]"
         )
-        setupNLTK()  # install language models for txt and nxml tasks
+        setupNLTK()  # install language models for text processing tasks
 
+    # Process PDF files if requested
     if usePDF:
         # print(f"  +++ Using option : usePDF: {usePDF}")
 
@@ -263,6 +377,28 @@ def get_files_list_from_directory(directory, myFileExt_str):
 
 
 # end of get_files_list_from_directory()
+
+
+def enhanced_split_documents(documents: list[Document], use_enhanced: bool = False) -> list[Document]:
+    """Split documents using enhanced or traditional methods."""
+    if use_enhanced and ENHANCED_PROCESSING_AVAILABLE:
+        console.print("[cyan]Using enhanced document processing with multiple chunking strategies[/cyan]")
+        processor = EnhancedDocumentProcessor()
+        
+        # Use multiple strategies for better coverage
+        chunks = processor.process_documents_with_multiple_strategies(
+            documents, 
+            strategies=["semantic", "hierarchical", "adaptive"]
+        )
+        
+        # Deduplicate similar chunks
+        chunks = processor.deduplicate_chunks(chunks)
+        
+        return chunks
+    else:
+        if use_enhanced and not ENHANCED_PROCESSING_AVAILABLE:
+            console.print("[yellow]Enhanced processing not available, using standard chunking[/yellow]")
+        return split_documents(documents)
 
 
 def split_documents(documents: list[Document]):

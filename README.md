@@ -2,7 +2,7 @@
 
 ![logo](graphics/infomaid_logo_yellow.png)
 
-Date: 7 Janurary 2025
+Date: 18 July 2025
 
 [Oliver Bonham-Carter](https://www.oliverbonhamcarter.com/)
 
@@ -16,9 +16,14 @@ Email: obonhamcarter at allegheny.edu
   - [Table of Contents](#table-of-contents)
   - [Pycon 2025 Poster](#pycon-2025-poster)
   - [Overview](#overview)
+  - [Enhanced RAG Features](#enhanced-rag-features)
+    - [New Retrieval Methods](#new-retrieval-methods)
+    - [Advanced Document Chunking](#advanced-document-chunking)
+    - [Additional Features](#additional-features)
   - [Prerequisites](#prerequisites)
     - [Set Up Local Models for Ollama](#set-up-local-models-for-ollama)
   - [Setting Up the Project](#setting-up-the-project)
+    - [Enhanced RAG Usage](#enhanced-rag-usage)
   - [Execution](#execution)
     - [Parameters](#parameters)
     - [Generation](#generation)
@@ -26,6 +31,9 @@ Email: obonhamcarter at allegheny.edu
     - [Working with PDF Data](#working-with-pdf-data)
       - [Sample Project](#sample-project)
   - [Testing the Code](#testing-the-code)
+    - [Testing Enhanced RAG Features](#testing-enhanced-rag-features)
+    - [Enhanced RAG Performance Comparison](#enhanced-rag-performance-comparison)
+  - [Additional Resources](#additional-resources)
   - [Ethical Note](#ethical-note)
   - [A Work In Progress](#a-work-in-progress)
 
@@ -39,6 +47,27 @@ _Infomaid_ is a simple AI prompt-based solution with built in Retrieval augmente
 Welcome to this simple AI application! _Infomaid_ is an experimental AI prompt-driven solution (i.e., each "chat" involves writing a separate prompt to use with a new execution of _Infomaid_) to help complete text-based work with information.
 
 The software runs locally, without the need to send information for processing to another machine online. This application requires [Ollama](https://www.ollama.com/), for service. Parts of this project code for working with PDFs were borrowed from Pixegami's RAG tutorial at [Reference](https://github.com/pixegami/rag-tutorial-v2). Much thanks!
+
+## Enhanced RAG Features
+
+_Infomaid_ now includes advanced Retrieval Augmented Generation (RAG) capabilities with multiple retrieval methods and improved document processing:
+
+### New Retrieval Methods
+- **TF-IDF Similarity**: Term Frequency-Inverse Document Frequency with cosine similarity for keyword-based retrieval
+- **BM25 Scoring**: Best Match 25 ranking algorithm used by search engines for superior relevance ranking
+- **Hybrid Search**: Combines vector embeddings with TF-IDF scores for balanced semantic and keyword matching
+- **Enhanced Vector Search**: Improved semantic similarity search with better integration
+
+### Advanced Document Chunking
+- **Semantic Chunking**: Respects sentence boundaries and maintains context
+- **Topic-Based Chunking**: Groups related content using TF-IDF and K-means clustering
+- **Hierarchical Chunking**: Follows document structure (paragraphs → sentences)
+- **Adaptive Chunking**: Adjusts chunk size based on content complexity
+
+### Additional Features
+- **Query Expansion**: Automatically adds related terms for better coverage
+- **Document Deduplication**: Removes similar chunks using cosine similarity
+- **Multiple Scoring Methods**: BM25, TF-IDF, and hybrid scoring for better relevance
 
 ## Prerequisites
 
@@ -94,6 +123,12 @@ If you have not yet updated your Poetry software, then you could perhaps try usi
 poetry install
 ```
 
+For enhanced RAG features, ensure you have the additional dependencies:
+
+``` bash
+poetry add scikit-learn numpy
+```
+
 Check that the software is working on your system.
 
 ``` bash
@@ -140,6 +175,36 @@ poetry run infomaid --useowndata --promptfile "promptFiles/myPrompt.txt"
 poetry run infomaid --count 2 --useowndata --prompt "what is the article's main idea?"
 ```
 
+### Enhanced RAG Usage
+
+The enhanced RAG features provide multiple retrieval methods for better results:
+
++ Use enhanced RAG with hybrid search (recommended for best results)
+
+``` bash
+poetry run infomaid --useowndata --enhancedrag --prompt "Your question here"
+```
+
++ Use TF-IDF for keyword-heavy technical documents
+
+``` bash
+poetry run infomaid --useowndata --enhancedrag --retrievalmethod tfidf --prompt "Find specific technical terms"
+```
+
++ Use BM25 for search engine-like ranking
+
+``` bash
+poetry run infomaid --useowndata --enhancedrag --retrievalmethod bm25 --prompt "Rank by relevance"
+```
+
++ Use hybrid approach for balanced semantic and keyword matching
+
+``` bash
+poetry run infomaid --useowndata --enhancedrag --retrievalmethod hybrid --count 3 --prompt "Complex analysis query"
+```
+
++ Available retrieval methods: `vector`, `tfidf`, `bm25`, `hybrid`
+
 ## Execution
 
 ### Parameters
@@ -161,6 +226,10 @@ poetry run infomaid --count 2 --useowndata --prompt "what is the article's main 
 
 + __resetdb__ - PDF documents are placed in the `data/` directory to provide the content to build a dataset with which the user may interact. To prepare this dataset after documents have been placd in `data/`, the parameter `--resetdb` is used to clear out the former PDF content and to update the dataset with the new PDFs. 
   + Note: Always use this parameter when changing PDF content to avoid informational contamination of the results.
+
++ __enhancedRAG__ - Enable enhanced RAG features with multiple retrieval methods and improved document processing.
+
++ __retrievalMethod__ - Choose the retrieval method for enhanced RAG: `vector` (semantic similarity), `tfidf` (keyword-based), `bm25` (search engine ranking), or `hybrid` (combined approach, recommended).
 
 ### Generation
 
@@ -243,6 +312,33 @@ poetry run infomaid --resetdb --usepdf # populate pdf db
 poetry run pytest # run tests with the pdf database.
 ```
 
+### Testing Enhanced RAG Features
+
+To test the new enhanced RAG functionality:
+
+``` python
+# Run enhanced RAG tests
+poetry run python test_enhanced_rag.py
+
+# Run demo of enhanced features
+poetry run python demo_enhanced_rag.py
+```
+
+### Enhanced RAG Performance Comparison
+
+| Method | Best For | Keyword Matching | Semantic Understanding |
+|--------|----------|------------------|----------------------|
+| vector | General purpose, semantic queries | Fair | Excellent |
+| tfidf | Technical docs, keyword-heavy content | Excellent | Fair |
+| bm25 | Search ranking, information retrieval | Excellent | Fair |
+| hybrid | Best overall performance | Excellent | Excellent |
+
+## Additional Resources
+
+- [Enhanced RAG Documentation](doc/ENHANCED_RAG_README.md) - Detailed guide to the new enhanced RAG features
+- [Implementation Summary](docs/IMPLEMENTATION_SUMMARY.md) - Technical details of the enhancements
+- [Demo Script](tests/demo_enhanced_rag.py) - Interactive demonstration of enhanced features
+
 ## Ethical Note
 
 While there is a lot of convenience in using AI to prepare drafts of letters and other communications, in all this automation, it is important to have a human presence to preside over the generated textual (or graphical work). While AI systems excel at processing vast amounts of data and executing tasks with remarkable efficiency, they lack the nuanced understanding and ethical judgment inherent to human cognition, in addition to the sense of ethics that ought to come from the human world.
@@ -257,8 +353,10 @@ With this in mind, the _Infomaid_ project must be used responsibly. The project 
 
 Check back often to see the evolution of the project!! _Infomaid_ is a work-in-progress. Updates will come periodically.
 
+**Latest Enhancement**: Enhanced RAG features with TF-IDF, BM25, hybrid search, and advanced document chunking strategies for significantly improved retrieval quality and relevance.
+
 If you would like to contribute to this project, __then please do!__ For instance, if you see some low-hanging fruit or task that you could easily complete, that could add value to the project, then I would love to have your insight.
 
-Otherwise, please create an Issue for bugs or errors. Since I am a teaching faculty member at Allegheny College, I may not have all the time necessary to quickly fix the bugs. I welcome the OpenSource Community to further the development of this project. Much thanks in advance. 
+Otherwise, please create an Issue for bugs or errors. Since I am a teaching faculty member at Allegheny College, I may not have all the time necessary to quickly fix the bugs. I welcome the OpenSource Community to further the development of this project. Much thanks in advance.
 
 If you appreciate this project, please consider clicking the project's _Star_ button. :-)
