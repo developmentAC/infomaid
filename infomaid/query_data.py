@@ -40,7 +40,7 @@ except ImportError:
     # Fallback to the older import if the new package is not available
     from langchain_community.vectorstores import Chroma
 
-from langchain.prompts import ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate
 
 try:
     from langchain_ollama import OllamaLLM as Ollama

@@ -18,7 +18,7 @@ import re
 from collections import Counter
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain.schema.document import Document
+from langchain_core.documents import Document
 from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain_community.document_loaders import TextLoader
 from langchain_community.vectorstores import Chroma

@@ -32,7 +32,6 @@ tags
 #########
 0_out/
 chroma/
-poetry.lock
 __pycache__/
 promptFiles/
 data/
