@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "infomaid"
-version = "0.21.5"
+version = "0.21.6"
 description = ""
 authors = ["Oliver Bonham-Carter <obonhamcarter@allegheny.edu>"]
 readme = "README.md"
