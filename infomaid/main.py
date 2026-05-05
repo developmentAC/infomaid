@@ -162,7 +162,7 @@ def main(
     Returns:
         None: Function handles all output and file operations internally
     """
-
+    console.print("\t[bright_yellow] Starting Infomaid CLI application...[/bright_yellow]\n")
     # Handle extended help display
     if bighelp:
         getBigHelp()
@@ -185,7 +185,7 @@ def main(
         else:
             # Interactive mode: request prompt from user
             seed = console.input(
-                "\t[bright_green] What kind of AI help do you need? [/bright_green] :"
+                "\t[bright_green] Enter a prompt here for AI response: [/bright_green] :"
             )
             if len(seed) == 0:  # User entered nothing
                 console.print(
@@ -578,10 +578,11 @@ if __name__ == "__main__":
     """
     Application entry point for direct script execution.
     
-    (The program starts here!)
+    (This code is executed when the script is run directly and not when imported as a module! Used for debugging purposes.)
 
     This conditional block ensures that the Typer CLI app is only
     started when the script is run directly, not when imported as a module.
     Essential for proper CLI functionality and testing.
     """
-    app()
+    console.print("[green]Starting Infomaid CLI application from main()...[/green]")
+    main()  # Start the application
