@@ -48,6 +48,17 @@ Welcome to this simple AI application! _Infomaid_ is an experimental AI prompt-d
 
 The software runs locally, without the need to send information for processing to another machine online. This application requires [Ollama](https://www.ollama.com/), for service. Parts of this project code for working with PDFs were borrowed from Pixegami's RAG tutorial at [Reference](https://github.com/pixegami/rag-tutorial-v2). Much thanks!
 
+## Security Notice
+
+⚠️ **ChromaDB Dependency Alert**: This project currently uses ChromaDB 1.5.9, which has a known critical vulnerability ([CVE-2026-45829](https://github.com/advisories/GHSA-f4j7-r4q5-qw2c)). 
+
+**Risk Assessment**: The risk to this project is **LOW** because:
+- Infomaid uses ChromaDB in **embedded/local mode only** (no server exposure)
+- The vulnerability affects ChromaDB's server API endpoints, which this project does not utilize
+- The application is designed for local development use
+
+**Recommendation**: No immediate action required, but monitor for updates. See [SECURITY.md](SECURITY.md) for details and run `./check_chromadb_security.sh` to check for updates.
+
 ## Enhanced RAG Features
 
 _Infomaid_ now includes advanced Retrieval Augmented Generation (RAG) capabilities with multiple retrieval methods and improved document processing:
